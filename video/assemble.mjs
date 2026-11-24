@@ -12,24 +12,24 @@ mkdirSync(tmp, { recursive: true });
 const marks = JSON.parse(readFileSync(`${out}/marks.json`, 'utf8'));
 const text = (o) => o[lang] ?? o.nl; // missing translation falls back to Dutch
 const W = script.viewport.width, H = script.viewport.height, FPS = 30;
-const brand = { name: 'KEY24', accent: '#F26B21', bg: '#101214', fg: '#FFFFFF', ...script.brand };
+const brand = { name: 'KEY24', navy: '#0F2147', ...script.brand }; // Key24 is one colour: dark navy. White is only the background.
 const ff = (args) => execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', ...args], { stdio: 'inherit' });
 const dur = (f) => Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).toString());
 const norm = ['-r', String(FPS), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-ar', '48000', '-ac', '2'];
-const wordmark = (size, digits = brand.accent) => `<span style="font-weight:800;letter-spacing:.02em;font-size:${size}px">${brand.name.replace(/(\d+)/, `<span style="color:${digits}">$1</span>`)}</span>`;
+const wordmark = (size) => `<span style="font-weight:800;letter-spacing:.02em;font-size:${size}px;color:${brand.navy}">${brand.name}</span>`;
 
 const browser = await chromium.launch({ channel: 'chrome' });
 async function shot(html, file, transparent = false) {
   const p = await browser.newPage({ viewport: { width: W, height: H } });
-  await p.setContent(`<body style="margin:0;font-family:Inter,'DejaVu Sans',Helvetica,sans-serif;${transparent ? '' : `background:${brand.bg};`}color:${brand.fg}">${html}</body>`);
+  await p.setContent(`<body style="margin:0;font-family:Inter,'DejaVu Sans',Helvetica,sans-serif;${transparent ? '' : 'background:#fff;'}color:${brand.navy}">${html}</body>`);
   await p.screenshot({ path: file, omitBackground: transparent }); await p.close();
 }
 // Full-screen card: wordmark, accent rule, the text.
-const card = (scene, file) => shot(`<div style="height:${H}px;display:grid;place-items:center"><div style="max-width:1280px"><div style="margin-bottom:36px">${wordmark(54)}</div><div style="width:120px;height:8px;background:${brand.accent};margin-bottom:44px"></div><div style="font-size:54px;font-weight:600;line-height:1.35">${text(scene)}</div></div></div>`, file);
+const card = (scene, file) => shot(`<div style="height:${H}px;display:grid;place-items:center"><div style="max-width:1280px"><div style="margin-bottom:36px">${wordmark(54)}</div><div style="width:120px;height:8px;background:${brand.navy};margin-bottom:44px"></div><div style="font-size:54px;font-weight:600;line-height:1.35">${text(scene)}</div></div></div>`, file);
 // Chapter tag, lower-left, over the screen footage (transparent PNG).
-const tag = (scene, file) => shot(`<div style="position:absolute;left:64px;bottom:112px;display:flex;align-items:stretch;box-shadow:0 8px 24px rgba(0,0,0,.35);border-radius:10px;overflow:hidden"><div style="background:${brand.accent};padding:14px 22px;font-size:34px;font-weight:800">${String(scene.chapterNo).padStart(2, '0')}</div><div style="background:${brand.bg};padding:14px 28px;font-size:34px;font-weight:700">${scene.chapter}</div></div>`, file, true);
+const tag = (scene, file) => shot(`<div style="position:absolute;left:64px;bottom:112px;display:flex;align-items:stretch;box-shadow:0 8px 24px rgba(0,0,0,.30);border-radius:10px;overflow:hidden"><div style="background:${brand.navy};color:#fff;padding:14px 22px;font-size:34px;font-weight:800">${String(scene.chapterNo).padStart(2, '0')}</div><div style="background:#fff;color:${brand.navy};padding:14px 28px;font-size:34px;font-weight:700">${scene.chapter}</div></div>`, file, true);
 // Title tag over the intro avatar.
-const titleTag = (file) => shot(`<div style="position:absolute;left:64px;bottom:112px;display:flex;align-items:stretch;box-shadow:0 8px 24px rgba(0,0,0,.35);border-radius:10px;overflow:hidden"><div style="background:${brand.accent};padding:14px 22px">${wordmark(34, brand.fg)}</div><div style="background:${brand.bg};padding:14px 28px;font-size:34px;font-weight:700">${text(script.title)}</div></div>`, file, true);
+const titleTag = (file) => shot(`<div style="position:absolute;left:64px;bottom:112px;display:flex;align-items:stretch;box-shadow:0 8px 24px rgba(0,0,0,.30);border-radius:10px;overflow:hidden"><div style="background:#fff;padding:14px 22px">${wordmark(34)}</div><div style="background:${brand.navy};color:#fff;padding:14px 28px;font-size:34px;font-weight:700">${text(script.title)}</div></div>`, file, true);
 
 const parts = [], subs = []; let clock = 0;
 // A still PNG has one frame, so loop it for the scene's length or the fade-in/out would have nothing to animate.
@@ -73,5 +73,5 @@ for (const { start, end, text } of subs) {
 writeFileSync(`${tmp}/subs.srt`, srt);
 writeFileSync(`${tmp}/concat.txt`, parts.map((p) => `file '${p.split('/').pop()}'`).join('\n'));
 const final = `${out}/${slug}-${lang}.mp4`;
-ff(['-f', 'concat', '-safe', '0', '-i', `${tmp}/concat.txt`, '-vf', `subtitles=${tmp}/subs.srt:force_style='FontName=Inter,FontSize=10,Bold=1,PrimaryColour=&HFFFFFF&,BorderStyle=3,Outline=1,Shadow=0,BackColour=&H99101214,MarginV=14'`, ...norm, final]);
+ff(['-f', 'concat', '-safe', '0', '-i', `${tmp}/concat.txt`, '-vf', `subtitles=${tmp}/subs.srt:force_style='FontName=Inter,FontSize=10,Bold=1,PrimaryColour=&HFFFFFF&,BorderStyle=3,Outline=1,Shadow=0,BackColour=&H6647210F,MarginV=14'`, ...norm, final]);
 console.log(`${final}  ${dur(final).toFixed(1)}s`, subs.map((s) => `${s.text.slice(0, 18)}… ${(s.end - s.start).toFixed(1)}s`));

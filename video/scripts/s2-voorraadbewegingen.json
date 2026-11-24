@@ -334,8 +334,6 @@
   ],
   "brand": {
     "name": "KEY24",
-    "accent": "#F26B21",
-    "bg": "#101214",
-    "fg": "#FFFFFF"
+    "navy": "#0F2147"
   }
 }
