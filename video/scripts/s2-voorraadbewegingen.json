@@ -1,0 +1,313 @@
+{
+  "slug": "s2-voorraadbewegingen",
+  "title": {
+    "nl": "Voorraad boeken: de zes bewegingen",
+    "en": "Booking stock: the six movements"
+  },
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "sku": "KW02T",
+  "scenes": [
+    {
+      "id": "intro",
+      "type": "avatar",
+      "nl": "In deze video leer je de zes voorraadbewegingen: telling, ontvangst, uitgifte, verkoop, retour en verplaatsing. Na deze video weet je precies welke je wanneer gebruikt.",
+      "en": "In this video you learn the six stock movements: count, receipt, issue, sale, return and transfer. After this video you know exactly which one to use when."
+    },
+    {
+      "id": "why",
+      "url": "/admin/voorraad",
+      "steps": [
+        {
+          "fill": [
+            "#stock-search",
+            "KW02T"
+          ]
+        },
+        {
+          "click": "text=KW02T"
+        },
+        {
+          "click": "summary[aria-label=\"Hoe voorraadbewegingen werken\"]"
+        },
+        {
+          "wait": 2500
+        },
+        {
+          "click": "summary[aria-label=\"Hoe voorraadbewegingen werken\"]"
+        }
+      ],
+      "nl": "Elke verandering in de voorraad is een beweging. Het vraagteken bij Voorraad boeken legt elke beweging uit. Een verkeerde beweging betekent verkeerde voorraad en een verkeerd bestelvoorstel. Maak je een foto als bewijs, dan staat die ook in het logboek.",
+      "en": "Every change in stock is a movement. The question mark next to Book stock explains each one. A wrong movement means wrong stock and a wrong reorder proposal. Add a photo as evidence and it appears in the journal too."
+    },
+    {
+      "id": "count",
+      "steps": [
+        {
+          "select": [
+            "label:has-text(\"Beweging\") select",
+            "count"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=quantity]",
+            "12"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=shelf]",
+            "A-03-02"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=box]",
+            "B000145"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=minimum]",
+            "4"
+          ]
+        },
+        {
+          "click": "button:has-text(\"Beweging opslaan\")"
+        },
+        {
+          "wait": 1500
+        }
+      ],
+      "nl": "Telling vervangt het aantal op deze bak door wat je echt telt. Hier staan twaalf stuks op locatie A-03-02, bak B000145. Minimum vier: bij vier stuks of minder zie je Lage voorraad.",
+      "en": "Count replaces the quantity in this bin with what you actually counted. Twelve pieces at location A-03-02, bin B000145. Minimum four: at four pieces or fewer you see Low stock."
+    },
+    {
+      "id": "receive",
+      "steps": [
+        {
+          "select": [
+            "label:has-text(\"Beweging\") select",
+            "receive"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=quantity]",
+            "20"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=note]",
+            "KeyDIY levering 23-11"
+          ]
+        },
+        {
+          "click": "button:has-text(\"Beweging opslaan\")"
+        },
+        {
+          "wait": 1500
+        }
+      ],
+      "nl": "Ontvangst telt erbij op. Twintig stuks binnen van KeyDIY, notitie erbij, opslaan.",
+      "en": "Receipt adds to stock. Twenty pieces in from KeyDIY, add a note, save."
+    },
+    {
+      "id": "issue",
+      "steps": [
+        {
+          "select": [
+            "label:has-text(\"Beweging\") select",
+            "issue"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=quantity]",
+            "1"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=note]",
+            "werkplaats"
+          ]
+        },
+        {
+          "click": "button:has-text(\"Beweging opslaan\")"
+        },
+        {
+          "wait": 1500
+        }
+      ],
+      "nl": "Uitgifte is voor intern gebruik, bijvoorbeeld een sleutel voor de werkplaats. Handmatig, zonder vaste grens.",
+      "en": "Issue is for internal use, for example a key for the workshop. Manual, no fixed limit."
+    },
+    {
+      "id": "sale",
+      "steps": [
+        {
+          "select": [
+            "label:has-text(\"Beweging\") select",
+            "sale"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=quantity]",
+            "2"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=amount]",
+            "89,00"
+          ]
+        },
+        {
+          "click": "button:has-text(\"Beweging opslaan\")"
+        },
+        {
+          "wait": 1500
+        }
+      ],
+      "nl": "Verkoop boekt af en koppelt het totaalbedrag van de verkoop. Heb je de factuur, dan plak je de link erbij. Zo klopt het rapport Meest verkocht.",
+      "en": "Sale removes stock and records the total sale amount. If you have the invoice, paste its link. That keeps the Best sold report correct."
+    },
+    {
+      "id": "return",
+      "steps": [
+        {
+          "select": [
+            "label:has-text(\"Beweging\") select",
+            "return"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=quantity]",
+            "1"
+          ]
+        },
+        {
+          "click": "button:has-text(\"Beweging opslaan\")"
+        },
+        {
+          "wait": 1500
+        }
+      ],
+      "nl": "Komt een artikel terug, dan is dat retour: het komt weer bij de voorraad.",
+      "en": "When an item comes back, that is a return: it goes back into stock."
+    },
+    {
+      "id": "count-dest",
+      "steps": [
+        {
+          "select": [
+            "label:has-text(\"Beweging\") select",
+            "count"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=quantity]",
+            "0"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=shelf]",
+            "B-01-04"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=box]",
+            "B000207"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=minimum]",
+            "0"
+          ]
+        },
+        {
+          "click": "button:has-text(\"Beweging opslaan\")"
+        },
+        {
+          "wait": 1500
+        }
+      ],
+      "nl": "Wil je verplaatsen, tel dan eerst de nieuwe bak, ook als die leeg is. Aantal nul, stelling B-01-04, bak B000207.",
+      "en": "To transfer, first count the new bin, even if it is empty. Quantity zero, shelf B-01-04, bin B000207."
+    },
+    {
+      "id": "transfer",
+      "steps": [
+        {
+          "click": "button:has-text(\"A-03-02 · B000145\")"
+        },
+        {
+          "select": [
+            "label:has-text(\"Beweging\") select",
+            "transfer"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=quantity]",
+            "5"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=destinationShelf]",
+            "B-01-04"
+          ]
+        },
+        {
+          "fill": [
+            "input[name=destinationBox]",
+            "B000207"
+          ]
+        },
+        {
+          "click": "button:has-text(\"Beweging opslaan\")"
+        },
+        {
+          "wait": 1500
+        }
+      ],
+      "nl": "Kies nu de bron en kies Verplaatsing. Vijf stuks gaan naar B-01-04, bak B000207. Het totaal blijft gelijk.",
+      "en": "Now pick the source bin and choose Transfer. Five pieces go to B-01-04, bin B000207. The total stays the same."
+    },
+    {
+      "id": "journal",
+      "url": "/admin/voorraad?view=journal",
+      "steps": [
+        {
+          "wait": 4000
+        }
+      ],
+      "nl": "In het voorraadlogboek staat elke beweging met tijd, aantal en notitie. Fout geboekt? Boek de tegenovergestelde beweging, of tel opnieuw. Verwijderen kan niet.",
+      "en": "The stock journal lists every movement with time, quantity and note. Booked something wrong? Book the opposite movement, or count again. Deleting is not possible."
+    },
+    {
+      "id": "mistakes",
+      "type": "card",
+      "nl": "Drie fouten die we vaak zien. Een telling gebruiken om iets erbij te zetten: dat overschrijft het aantal. Een verkoop boeken zonder bedrag: dan mist het rapport omzet. En verplaatsen naar een bak die nog niet geteld is: dan krijg je de melding Tel de bestemming eerst.",
+      "en": "Three mistakes we often see. Using a count to add items: that overwrites the quantity. Booking a sale without an amount: the report misses revenue. And transferring to a bin that was never counted: you get the message Count the destination first."
+    },
+    {
+      "id": "outro",
+      "type": "avatar",
+      "nl": "Samengevat: telling overschrijft, ontvangst en retour tellen op, uitgifte en verkoop tellen af, verplaatsing schuift. Volgende video: etiketten en scannen met je telefoon.",
+      "en": "In short: count overwrites, receipt and return add, issue and sale subtract, transfer moves. Next video: labels and scanning with your phone."
+    }
+  ]
+}
