@@ -1,51 +1,162 @@
-// Builds the finished video from screen.webm + per-scene voice-overs + avatar clips, in the Key24 template.
-// Per screen scene: footage slowed to the voice-over, chapter tag lower-left. Cards and avatar clips are used as they are.
-// Burns captions, concatenates.   Usage: node video/assemble.mjs <slug> <lang>   → video/out/<slug>/<slug>-<lang>.mp4
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+// Builds the finished video in the Key24 template.
+//   intro   : the avatar clip, with the logo popping in next to her when she starts to speak
+//   screens : the CRM recording slowed to the voice-over, a big-arrow cursor (recorded), zoom into every click, a click sound,
+//             the Key24 plate over the CRM's own logo, the step number under it
+//   cards   : animated, in the brand's editorial style (cream paper, big numerals, purple rules)
+//   outro   : the avatar clip, then the Key24 logotype
+//   captions: brand purple with a white outline, no dark shade
+// Usage: node video/assemble.mjs <slug> <lang>   → video/out/<slug>/<slug>-<lang>.mp4
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import { resolve, join } from 'node:path';
 import { chromium } from 'playwright';
 
 const [slug, lang = 'nl'] = process.argv.slice(2);
 const script = JSON.parse(readFileSync(`video/scripts/${slug}.json`, 'utf8'));
-const out = `video/out/${slug}`, media = `${out}/${lang}`, tmp = `${out}/${lang}/tmp`;
-mkdirSync(tmp, { recursive: true });
+const out = `video/out/${slug}`, media = `${out}/${lang}`, tmp = resolve(`${out}/${lang}/tmp`);
+rmSync(tmp, { recursive: true, force: true }); mkdirSync(tmp, { recursive: true });
 const marks = JSON.parse(readFileSync(`${out}/marks.json`, 'utf8'));
+const clicksAll = existsSync(`${out}/clicks.json`) ? JSON.parse(readFileSync(`${out}/clicks.json`, 'utf8')) : [];
 const text = (o) => o[lang] ?? o.nl; // missing translation falls back to Dutch
 const W = script.viewport.width, H = script.viewport.height, FPS = 30;
-const brand = { name: 'KEY24', navy: '#0F2147', ...script.brand }; // Key24 is one colour: dark navy. White is only the background.
+// Key24 brand (key24rework v2): aubergine purple, cream paper, IBM Plex Sans. The logo is the plain wordmark.
+const brand = { name: 'KEY24', purple: '#541554', purpleDark: '#421043', cream: '#f4ede4', paper: '#faf7f2', lilac: '#ead7eb', ink: '#1d1c1d', grey: '#615a62', ...script.brand };
+const FONTS = resolve('video/assets/fonts');
 const ff = (args) => execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', ...args], { stdio: 'inherit' });
 const dur = (f) => Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).toString());
 const norm = ['-r', String(FPS), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-ar', '48000', '-ac', '2'];
-const wordmark = (size) => `<span style="font-weight:800;letter-spacing:.02em;font-size:${size}px;color:${brand.navy}">${brand.name}</span>`;
+const pad4 = (n) => String(n).padStart(4, '0');
 
+// ---------- HTML → PNG/JPG frames ----------
+const fontCss = [['Regular', 400], ['Medium', 500], ['SemiBold', 600], ['Bold', 700]]
+  .map(([name, weight]) => `@font-face{font-family:'IBM Plex Sans';font-weight:${weight};src:url('file://${FONTS}/IBMPlexSans-${name}.ttf')}`).join('');
+const baseCss = (transparent) => `${fontCss}
+  html,body{margin:0;width:${W}px;height:${H}px;overflow:hidden;font-family:'IBM Plex Sans',system-ui,sans-serif;color:${brand.ink};${transparent ? 'background:transparent;' : ''}}
+  .wm{font-weight:700;letter-spacing:-.04em;line-height:1;color:${brand.purple}}`;
 const browser = await chromium.launch({ channel: 'chrome' });
-async function shot(html, file, transparent = false) {
-  const p = await browser.newPage({ viewport: { width: W, height: H } });
-  await p.setContent(`<body style="margin:0;font-family:Inter,'DejaVu Sans',Helvetica,sans-serif;${transparent ? '' : 'background:#fff;'}color:${brand.navy}">${html}</body>`);
-  await p.screenshot({ path: file, omitBackground: transparent }); await p.close();
+let pageNo = 0;
+async function openPage(html, transparent) {
+  const file = join(tmp, `page${++pageNo}.html`);
+  writeFileSync(file, `<!doctype html><meta charset="utf-8"><style>${baseCss(transparent)}</style>${html}`);
+  const page = await browser.newPage({ viewport: { width: W, height: H } });
+  await page.goto('file://' + file);
+  await page.evaluate(() => document.fonts.ready);
+  return page;
 }
-// Full-screen card: wordmark, accent rule, the text.
-const card = (scene, file) => shot(`<div style="height:${H}px;display:grid;place-items:center"><div style="max-width:1280px"><div style="margin-bottom:36px">${wordmark(54)}</div><div style="width:120px;height:8px;background:${brand.navy};margin-bottom:44px"></div><div style="font-size:54px;font-weight:600;line-height:1.35">${text(scene)}</div></div></div>`, file);
-// Chapter tag, lower-left, over the screen footage (transparent PNG).
-const tag = (scene, file) => shot(`<div style="position:absolute;left:64px;bottom:112px;display:flex;align-items:stretch;box-shadow:0 8px 24px rgba(0,0,0,.30);border-radius:10px;overflow:hidden"><div style="background:${brand.navy};color:#fff;padding:14px 22px;font-size:34px;font-weight:800">${String(scene.chapterNo).padStart(2, '0')}</div><div style="background:#fff;color:${brand.navy};padding:14px 28px;font-size:34px;font-weight:700">${scene.chapter}</div></div>`, file, true);
-// Title tag over the intro avatar.
-const titleTag = (file) => shot(`<div style="position:absolute;left:64px;bottom:112px;display:flex;align-items:stretch;box-shadow:0 8px 24px rgba(0,0,0,.30);border-radius:10px;overflow:hidden"><div style="background:#fff;padding:14px 22px">${wordmark(34)}</div><div style="background:${brand.navy};color:#fff;padding:14px 28px;font-size:34px;font-weight:700">${text(script.title)}</div></div>`, file, true);
+// One still (a plate, a tag).
+async function still(html, file) {
+  const page = await openPage(html, true);
+  await page.screenshot({ path: file, omitBackground: true }); await page.close();
+}
+// Animation → numbered frames. Every CSS animation is paused and stepped to the frame's time, so the result is exact.
+async function frames(name, html, seconds, { transparent = false } = {}) {
+  const dir = join(tmp, name); mkdirSync(dir, { recursive: true });
+  const page = await openPage(html, transparent);
+  await page.evaluate(() => document.getAnimations().forEach((a) => a.pause()));
+  const count = Math.ceil(seconds * FPS), ext = transparent ? 'png' : 'jpg';
+  for (let i = 0; i < count; i++) {
+    await page.evaluate((ms) => document.getAnimations().forEach((a) => { a.currentTime = ms; }), (i * 1000) / FPS);
+    await page.screenshot(transparent ? { path: join(dir, `f${pad4(i)}.png`), omitBackground: true } : { path: join(dir, `f${pad4(i)}.jpg`), type: 'jpeg', quality: 92 });
+  }
+  await page.close();
+  return { pattern: join(dir, `f%04d.${ext}`), count };
+}
 
+const paper = `background:${brand.cream} repeating-linear-gradient(90deg,transparent 0 119px,rgba(29,28,29,.045) 119px 120px);`;
+const rise = (delay, d = 0.6) => `animation:rise ${d}s cubic-bezier(.2,.8,.2,1) ${delay.toFixed(2)}s both`;
+const keyframes = `@keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  @keyframes sweep{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes pop{from{opacity:0;transform:translateX(110px) scale(.72)}to{opacity:1;transform:none}}`;
+
+// ---------- cards ----------
+// Text card: the heading, then each item (huge purple numeral + sentence) appears when the voice reaches it.
+async function textCard(scene, seconds) {
+  const heading = text({ nl: scene.heading ?? '', ...(scene.headingEn ? { en: scene.headingEn } : {}) }) || '';
+  const items = (lang === 'en' && scene.itemsEn) ? scene.itemsEn : scene.items;
+  const sentences = [heading, ...items], total = sentences.join('').length;
+  let acc = 0; const at = sentences.map((s) => { const t = 0.25 + (seconds - 1.6) * (acc / total); acc += s.length; return t; });
+  const rows = items.map((s, i) => `<div style="display:grid;grid-template-columns:200px 1fr;align-items:center;height:190px;border-top:2px solid ${brand.ink}22;${rise(at[i + 1])}">
+      <div style="position:relative"><div class="wm" style="font-size:170px;letter-spacing:-.06em">${i + 1}</div>
+        <div style="position:absolute;left:0;bottom:6px;width:120px;height:8px;background:${brand.purple};transform-origin:left;animation:sweep .5s ease-out ${(at[i + 1] + 0.35).toFixed(2)}s both"></div></div>
+      <div style="font-size:46px;line-height:1.28;font-weight:500;max-width:1240px">${s}</div></div>`).join('');
+  const html = `<style>${keyframes}</style><div style="${paper}position:absolute;inset:0;padding:70px 120px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid ${brand.ink};padding-bottom:22px">
+      <div class="wm" style="font-size:38px">${brand.name}</div>
+      <div style="font-size:17px;letter-spacing:.22em;color:${brand.grey};font-weight:500">${text(script.title).toUpperCase()}</div></div>
+    <div style="font-size:92px;line-height:1.05;font-weight:700;letter-spacing:-.035em;margin:60px 0 44px;max-width:1500px;${rise(at[0])}">${heading}</div>
+    ${rows}</div>`;
+  const lastStart = Math.min(seconds, at[at.length - 1] + 1.2);
+  return { ...(await frames(`card-${scene.id}`, html, lastStart)), animEnd: lastStart };
+}
+// Closing card: the logotype, letter by letter, a purple rule, then the line about the next video.
+async function endCard(scene, seconds) {
+  const letters = [...brand.name].map((c, i) => `<span style="display:inline-block;${rise(0.15 + i * 0.09, 0.55)}">${c}</span>`).join('');
+  const html = `<style>${keyframes}</style><div style="${paper}position:absolute;inset:0;display:grid;place-items:center;text-align:center">
+    <div><div class="wm" style="font-size:300px;letter-spacing:-.05em">${letters}</div>
+      <div style="width:100%;height:12px;background:${brand.purple};margin:10px 0 40px;transform-origin:left;animation:sweep .7s ease-out .8s both"></div>
+      <div style="font-size:40px;font-weight:500;color:${brand.grey};animation:fade .6s ease-out 1.5s both">${text(scene)}</div></div></div>`;
+  return frames(`end-${scene.id}`, html, seconds);
+}
+// Intro overlay: the logo pops in beside her, a rule sweeps under it, then the video's title.
+async function introOverlay(seconds) {
+  const html = `<style>${keyframes}</style>
+    <div style="position:absolute;left:1210px;top:170px;width:590px;animation:pop .75s cubic-bezier(.2,1.35,.4,1) .15s both;transform-origin:left center">
+      <div style="background:${brand.purple};border-radius:20px;padding:46px 52px 40px;box-shadow:0 22px 48px rgba(0,0,0,.30)">
+        <div class="wm" style="font-size:150px;color:#fff">${brand.name}</div>
+        <div style="height:8px;background:${brand.lilac};margin-top:26px;transform-origin:left;animation:sweep .6s ease-out .8s both"></div></div>
+      <div style="margin-top:22px;background:#fff;border-radius:12px;padding:18px 28px;font-size:34px;font-weight:600;color:${brand.purple};box-shadow:0 12px 30px rgba(0,0,0,.22);animation:rise .6s cubic-bezier(.2,.8,.2,1) 1.2s both">${text(script.title)}</div></div>`;
+  return frames('intro-overlay', html, seconds, { transparent: true });
+}
+
+// ---------- stills ----------
+// Over the CRM's own header, so the customer's name is replaced by the brand's.
+const plate = join(tmp, 'plate.png');
+await still(`<div style="position:absolute;left:10px;top:12px;width:236px;height:56px;background:#fafafa;border-radius:10px;display:flex;align-items:center;padding-left:14px;gap:12px">
+  <div class="wm" style="font-size:34px">${brand.name}</div><div style="font-size:13px;font-weight:600;letter-spacing:.16em;color:${brand.grey};margin-top:6px">CRM</div></div>`, plate);
+// Step number under the logo (upper left).
+const tag = (scene, file) => still(`<div style="position:absolute;left:24px;top:84px;display:flex;align-items:stretch;border-radius:12px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.28)">
+  <div style="background:${brand.purple};color:#fff;padding:12px 20px;font-size:34px;font-weight:700">${String(scene.chapterNo).padStart(2, '0')}</div>
+  <div style="background:#fff;color:${brand.purple};padding:12px 26px;font-size:34px;font-weight:700;letter-spacing:-.01em">${scene.chapter}</div></div>`, file);
+
+// ---------- click sound and zoom ----------
+const clickWav = join(tmp, 'click.wav');
+ff(['-f', 'lavfi', '-i', `aevalsrc='(0.45*sin(2*PI*2600*t)+0.4*sin(2*PI*950*t)+0.25*(random(0)*2-1)*exp(-t*260))*exp(-t*85)':s=48000:d=0.14`, '-af', 'volume=0.5', clickWav]);
+const smooth = (u) => `((${u})*(${u})*(3-2*(${u})))`;
+// 0 → 1 → 0 around a click at second c: rises over `a`, holds, falls over `b`.
+const envelope = (c, a = 0.55, hold = 0.95, b = 0.6) => `(${smooth(`clip((on/${FPS}-${(c - a).toFixed(3)})/${a},0,1)`)}*(1-${smooth(`clip((on/${FPS}-${(c + hold).toFixed(3)})/${b},0,1)`)}))`;
+const maxOf = (list) => list.reduce((acc, e) => (acc ? `max(${acc},${e})` : e), '');
+function zoomFilter(clicks, amount = 0.5) {
+  const env = clicks.map((c) => envelope(c.t));
+  const z = `(1+${amount}*${maxOf(env)})`;
+  const sum = env.join('+');
+  const fx = `((${clicks.map((c, i) => `${env[i]}*${2 * c.x}`).join('+')})/(${sum}+0.000001))`;
+  const fy = `((${clicks.map((c, i) => `${env[i]}*${2 * c.y}`).join('+')})/(${sum}+0.000001))`;
+  // zoompan crops a window of iw/zoom; keeping the focal point where it is: x = f * (1 - 1/zoom). Work on a 2x frame so the movement is sub-pixel smooth.
+  return `scale=${2 * W}:${2 * H}:flags=lanczos,zoompan=z='${z}':x='${fx}*(1-1/${z})':y='${fy}*(1-1/${z})':d=1:s=${W}x${H}:fps=${FPS}`;
+}
+
+// ---------- scenes ----------
 const parts = [], subs = []; let clock = 0;
-// A still PNG has one frame, so loop it for the scene's length or the fade-in/out would have nothing to animate.
-const tagInput = (png, seconds) => ['-loop', '1', '-framerate', String(FPS), '-t', seconds.toFixed(2), '-i', png];
-const withTag = (base, png, from, to, seconds) => [...tagInput(png, seconds), '-filter_complex', `${base}[bg];[1:v]format=rgba,fade=t=in:st=${from}:d=0.4:alpha=1,fade=t=out:st=${to - 0.4}:d=0.4:alpha=1[tag];[bg][tag]overlay=0:0:eof_action=pass[v]`];
 for (const scene of script.scenes) {
-  const vo = `${media}/vo-${scene.id}.mp3`, seg = `${tmp}/${scene.id}.mp4`;
+  const vo = `${media}/vo-${scene.id}.mp3`, seg = join(tmp, `${scene.id}.mp4`);
   if (scene.type === 'avatar') {
-    const base = `[0:v]scale=${W}:${H}:force_original_aspect_ratio=decrease,pad=${W}:${H}:(ow-iw)/2:(oh-ih)/2,fps=${FPS}`;
+    const base = `scale=${W}:${H}:force_original_aspect_ratio=decrease,pad=${W}:${H}:(ow-iw)/2:(oh-ih)/2,fps=${FPS}`;
+    const clip = `${media}/avatar-${scene.id}.mp4`;
     if (scene.id === 'intro') {
-      const png = `${tmp}/intro-tag.png`; await titleTag(png);
-      ff(['-i', `${media}/avatar-${scene.id}.mp4`, ...withTag(base, png, 0.8, 5.5, dur(`${media}/avatar-${scene.id}.mp4`)), '-map', '[v]', '-map', '0:a', ...norm, seg]);
-    } else ff(['-i', `${media}/avatar-${scene.id}.mp4`, '-vf', base.replace('[0:v]', ''), ...norm, seg]);
+      const overlay = await introOverlay(2.8);
+      ff(['-i', clip, '-framerate', String(FPS), '-itsoffset', '0.3', '-i', overlay.pattern,
+        '-filter_complex', `[0:v]${base}[bg];[1:v]format=rgba[ov];[bg][ov]overlay=0:0:eof_action=repeat[v]`, '-map', '[v]', '-map', '0:a', ...norm, seg]);
+    } else ff(['-i', clip, '-vf', base, ...norm, seg]);
   } else if (scene.type === 'card') {
-    const png = `${tmp}/${scene.id}.png`; await card(scene, png);
-    ff(['-loop', '1', '-i', png, '-i', vo, '-shortest', '-vf', `scale=${W}:${H}`, ...norm, seg]);
+    const voice = dur(vo), total = voice + 0.7;
+    const card = await textCard(scene, voice);
+    ff(['-framerate', String(FPS), '-i', card.pattern, '-i', vo,
+      '-filter_complex', `[0:v]tpad=stop_mode=clone:stop_duration=${Math.max(0, total - card.animEnd + 0.1).toFixed(2)},scale=${W}:${H},fps=${FPS}[v];[1:a]apad[a]`, '-map', '[v]', '-map', '[a]', '-t', total.toFixed(2), ...norm, seg]);
+  } else if (scene.type === 'endcard') {
+    const seconds = scene.seconds ?? 3.6;
+    const card = await endCard(scene, seconds);
+    ff(['-framerate', String(FPS), '-i', card.pattern, '-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo', '-t', seconds.toFixed(2), '-pix_fmt', 'yuv420p', ...norm, seg]);
   } else {
     const i = marks.findIndex((m) => m.id === scene.id);
     if (i < 0) throw new Error(`no mark for scene ${scene.id}`);
@@ -53,18 +164,27 @@ for (const scene of script.scenes) {
     const start = marks[i].at + trim, len = marks[i + 1].at - start, voice = dur(vo) + 0.5;
     // Footage shorter than the voice: slow it down (at most 1.6x), freeze the rest. Longer: let it run, the voice ends early.
     const factor = Math.min(1.6, Math.max(1, voice / len)), shown = len * factor, total = Math.max(shown, voice);
-    const png = `${tmp}/${scene.id}-tag.png`; await tag(scene, png);
-    const base = `[0:v]setpts=PTS*${factor.toFixed(4)},tpad=stop_mode=clone:stop_duration=${Math.max(0, total - shown + 0.1).toFixed(2)},scale=${W}:${H},fps=${FPS}`;
-    ff(['-ss', String(start), '-t', String(len), '-i', `${out}/screen.webm`, ...tagInput(png, total), '-i', vo,
-      '-filter_complex', `${base}[bg];[1:v]format=rgba,fade=t=in:st=0.4:d=0.4:alpha=1,fade=t=out:st=3.8:d=0.4:alpha=1[tag];[bg][tag]overlay=0:0:eof_action=pass[v];[2:a]apad[a]`,
+    const sceneClicks = clicksAll.filter((c) => c.scene === scene.id && c.t >= start - 0.3 && c.t <= start + len).map((c) => ({ t: (c.t - start) * factor, x: c.x, y: c.y })).filter((c) => c.t >= 0.2);
+    const tagPng = join(tmp, `${scene.id}-tag.png`); await tag(scene, tagPng);
+    const still_ = (png) => ['-loop', '1', '-framerate', String(FPS), '-t', total.toFixed(2), '-i', png];
+    const zoom = sceneClicks.length ? zoomFilter(sceneClicks) : `scale=${W}:${H}`;
+    const audioIn = sceneClicks.flatMap(() => ['-i', clickWav]);
+    const mix = sceneClicks.map((c, k) => `[${4 + k}:a]adelay=${Math.round(c.t * 1000)}|${Math.round(c.t * 1000)}[c${k}]`).join(';');
+    const audio = sceneClicks.length
+      ? `[3:a]apad[v0];${mix};[v0]${sceneClicks.map((_, k) => `[c${k}]`).join('')}amix=inputs=${sceneClicks.length + 1}:normalize=0:duration=first[mx];[mx]alimiter=limit=0.89:attack=3:release=60[a]`
+      : '[3:a]apad[a]';
+    ff(['-ss', String(start), '-t', String(len), '-i', `${out}/screen.webm`, ...still_(plate), ...still_(tagPng), '-i', vo, ...audioIn,
+      '-filter_complex', `[0:v]setpts=PTS*${factor.toFixed(4)},fps=${FPS},tpad=stop_mode=clone:stop_duration=${Math.max(0, total - shown + 0.2).toFixed(2)},${zoom}[z];` +
+        `[z][1:v]overlay=0:0[p];[2:v]format=rgba,fade=t=in:st=0.4:d=0.4:alpha=1,fade=t=out:st=${Math.max(1, total - 0.8).toFixed(2)}:d=0.4:alpha=1[tg];[p][tg]overlay=0:0[v];${audio}`,
       '-map', '[v]', '-map', '[a]', '-t', total.toFixed(2), ...norm, seg]);
   }
-  const d = dur(seg); if (scene.type !== 'card') subs.push({ start: clock, end: clock + d, text: text(scene) }); // a card already shows its text
+  const d = dur(seg);
+  if (!['card', 'endcard'].includes(scene.type)) subs.push({ start: clock, end: clock + d, text: text(scene) }); // a card already shows its text
   clock += d; parts.push(seg);
 }
 await browser.close();
 
-// Captions: a scene's text split into sentences, timed by character share. Boxed, so they read on any footage.
+// ---------- captions (brand purple, white outline, no dark shade) ----------
 const ts = (s) => new Date(s * 1000).toISOString().slice(11, 23).replace('.', ',');
 let n = 1, srt = '';
 for (const { start, end, text } of subs) {
@@ -74,5 +194,8 @@ for (const { start, end, text } of subs) {
 writeFileSync(`${tmp}/subs.srt`, srt);
 writeFileSync(`${tmp}/concat.txt`, parts.map((p) => `file '${p.split('/').pop()}'`).join('\n'));
 const final = `${out}/${slug}-${lang}.mp4`;
-ff(['-f', 'concat', '-safe', '0', '-i', `${tmp}/concat.txt`, '-vf', `subtitles=${tmp}/subs.srt:force_style='FontName=Inter,FontSize=10,Bold=1,PrimaryColour=&HFFFFFF&,BorderStyle=3,Outline=1,Shadow=0,BackColour=&H6647210F,MarginV=14'`, ...norm, final]);
+const assColour = (hex) => `&H00${hex.slice(5, 7)}${hex.slice(3, 5)}${hex.slice(1, 3)}`.toUpperCase(); // #RRGGBB → ASS &H00BBGGRR
+ff(['-f', 'concat', '-safe', '0', '-i', `${tmp}/concat.txt`,
+  '-vf', `subtitles=${tmp}/subs.srt:fontsdir=${FONTS}:force_style='FontName=IBM Plex Sans,Bold=1,FontSize=12,PrimaryColour=${assColour(brand.purple)},OutlineColour=&H00FFFFFF,BorderStyle=1,Outline=3,Shadow=0,MarginV=22'`,
+  ...norm, final]);
 console.log(`${final}  ${dur(final).toFixed(1)}s`, subs.map((s) => `${s.text.slice(0, 18)}… ${(s.end - s.start).toFixed(1)}s`));

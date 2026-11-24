@@ -323,17 +323,42 @@
       "nl": "Drie fouten die we vaak zien. Een telling gebruiken om iets erbij te zetten: dat overschrijft het aantal. Een verkoop boeken zonder bedrag: dan mist het rapport omzet. En verplaatsen naar een bak die nog niet geteld is: dan krijg je de melding Tel de bestemming eerst.",
       "en": "Three mistakes we often see. Using a count to add items: that overwrites the quantity. Booking a sale without an amount: the report misses revenue. And transferring to a bin that was never counted: you get the message Count the destination first.",
       "chapter": "Veelgemaakte fouten",
-      "chapterNo": 10
+      "chapterNo": 10,
+      "heading": "Drie fouten die we vaak zien.",
+      "items": [
+        "Een telling gebruiken om iets erbij te zetten: dat overschrijft het aantal.",
+        "Een verkoop boeken zonder bedrag: dan mist het rapport omzet.",
+        "En verplaatsen naar een bak die nog niet geteld is: dan krijg je de melding Tel de bestemming eerst."
+      ],
+      "headingEn": "Three mistakes we often see.",
+      "itemsEn": [
+        "Using a count to add items: that overwrites the quantity.",
+        "Booking a sale without an amount: the report misses revenue.",
+        "Transferring to a bin that was never counted: you get the message Count the destination first."
+      ]
     },
     {
       "id": "outro",
       "type": "avatar",
       "nl": "Samengevat: telling overschrijft, ontvangst en retour tellen op, uitgifte en verkoop tellen af, verplaatsing schuift. Volgende video: etiketten en scannen met je telefoon.",
       "en": "In short: count overwrites, receipt and return add, issue and sale subtract, transfer moves. Next video: labels and scanning with your phone."
+    },
+    {
+      "id": "end",
+      "type": "endcard",
+      "seconds": 3.8,
+      "nl": "Volgende video: etiketten en scannen met je telefoon.",
+      "en": "Next video: labels and scanning with your phone."
     }
   ],
   "brand": {
     "name": "KEY24",
-    "navy": "#0F2147"
+    "purple": "#541554",
+    "purpleDark": "#421043",
+    "cream": "#f4ede4",
+    "paper": "#faf7f2",
+    "lilac": "#ead7eb",
+    "ink": "#1d1c1d",
+    "grey": "#615a62"
   }
 }
