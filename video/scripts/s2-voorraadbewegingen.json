@@ -8,13 +8,13 @@
     "width": 1920,
     "height": 1080
   },
-  "sku": "KW02T",
+  "sku": "ALRK03",
   "scenes": [
     {
       "id": "intro",
       "type": "avatar",
-      "nl": "In deze video leer je de zes voorraadbewegingen: telling, ontvangst, uitgifte, verkoop, retour en verplaatsing. Na deze video weet je precies welke je wanneer gebruikt.",
-      "en": "In this video you learn the six stock movements: count, receipt, issue, sale, return and transfer. After this video you know exactly which one to use when."
+      "nl": "Welkom bij Key24. In deze video leer je de zes voorraadbewegingen, en wanneer je welke gebruikt.",
+      "en": "Welcome to Key24. In this video you learn the six stock movements, and when to use each one."
     },
     {
       "id": "why",
@@ -23,11 +23,11 @@
         {
           "fill": [
             "#stock-search",
-            "KW02T"
+            "ALRK03"
           ]
         },
         {
-          "click": "text=KW02T"
+          "click": "text=ALRK03"
         },
         {
           "click": "summary[aria-label=\"Hoe voorraadbewegingen werken\"]"
@@ -40,7 +40,10 @@
         }
       ],
       "nl": "Elke verandering in de voorraad is een beweging. Het vraagteken bij Voorraad boeken legt elke beweging uit. Een verkeerde beweging betekent verkeerde voorraad en een verkeerd bestelvoorstel. Maak je een foto als bewijs, dan staat die ook in het logboek.",
-      "en": "Every change in stock is a movement. The question mark next to Book stock explains each one. A wrong movement means wrong stock and a wrong reorder proposal. Add a photo as evidence and it appears in the journal too."
+      "en": "Every change in stock is a movement. The question mark next to Book stock explains each one. A wrong movement means wrong stock and a wrong reorder proposal. Add a photo as evidence and it appears in the journal too.",
+      "chapter": "Waarom",
+      "chapterNo": 1,
+      "trim": 4.6
     },
     {
       "id": "count",
@@ -83,7 +86,9 @@
         }
       ],
       "nl": "Telling vervangt het aantal op deze bak door wat je echt telt. Hier staan twaalf stuks op locatie A-03-02, bak B000145. Minimum vier: bij vier stuks of minder zie je Lage voorraad.",
-      "en": "Count replaces the quantity in this bin with what you actually counted. Twelve pieces at location A-03-02, bin B000145. Minimum four: at four pieces or fewer you see Low stock."
+      "en": "Count replaces the quantity in this bin with what you actually counted. Twelve pieces at location A-03-02, bin B000145. Minimum four: at four pieces or fewer you see Low stock.",
+      "chapter": "Telling",
+      "chapterNo": 2
     },
     {
       "id": "receive",
@@ -114,7 +119,9 @@
         }
       ],
       "nl": "Ontvangst telt erbij op. Twintig stuks binnen van KeyDIY, notitie erbij, opslaan.",
-      "en": "Receipt adds to stock. Twenty pieces in from KeyDIY, add a note, save."
+      "en": "Receipt adds to stock. Twenty pieces in from KeyDIY, add a note, save.",
+      "chapter": "Ontvangst",
+      "chapterNo": 3
     },
     {
       "id": "issue",
@@ -145,7 +152,9 @@
         }
       ],
       "nl": "Uitgifte is voor intern gebruik, bijvoorbeeld een sleutel voor de werkplaats. Handmatig, zonder vaste grens.",
-      "en": "Issue is for internal use, for example a key for the workshop. Manual, no fixed limit."
+      "en": "Issue is for internal use, for example a key for the workshop. Manual, no fixed limit.",
+      "chapter": "Uitgifte",
+      "chapterNo": 4
     },
     {
       "id": "sale",
@@ -176,7 +185,9 @@
         }
       ],
       "nl": "Verkoop boekt af en koppelt het totaalbedrag van de verkoop. Heb je de factuur, dan plak je de link erbij. Zo klopt het rapport Meest verkocht.",
-      "en": "Sale removes stock and records the total sale amount. If you have the invoice, paste its link. That keeps the Best sold report correct."
+      "en": "Sale removes stock and records the total sale amount. If you have the invoice, paste its link. That keeps the Best sold report correct.",
+      "chapter": "Verkoop",
+      "chapterNo": 5
     },
     {
       "id": "return",
@@ -201,7 +212,9 @@
         }
       ],
       "nl": "Komt een artikel terug, dan is dat retour: het komt weer bij de voorraad.",
-      "en": "When an item comes back, that is a return: it goes back into stock."
+      "en": "When an item comes back, that is a return: it goes back into stock.",
+      "chapter": "Retour",
+      "chapterNo": 6
     },
     {
       "id": "count-dest",
@@ -244,7 +257,9 @@
         }
       ],
       "nl": "Wil je verplaatsen, tel dan eerst de nieuwe bak, ook als die leeg is. Aantal nul, stelling B-01-04, bak B000207.",
-      "en": "To transfer, first count the new bin, even if it is empty. Quantity zero, shelf B-01-04, bin B000207."
+      "en": "To transfer, first count the new bin, even if it is empty. Quantity zero, shelf B-01-04, bin B000207.",
+      "chapter": "Nieuwe bak tellen",
+      "chapterNo": 7
     },
     {
       "id": "transfer",
@@ -284,7 +299,9 @@
         }
       ],
       "nl": "Kies nu de bron en kies Verplaatsing. Vijf stuks gaan naar B-01-04, bak B000207. Het totaal blijft gelijk.",
-      "en": "Now pick the source bin and choose Transfer. Five pieces go to B-01-04, bin B000207. The total stays the same."
+      "en": "Now pick the source bin and choose Transfer. Five pieces go to B-01-04, bin B000207. The total stays the same.",
+      "chapter": "Verplaatsing",
+      "chapterNo": 8
     },
     {
       "id": "journal",
@@ -295,13 +312,18 @@
         }
       ],
       "nl": "In het voorraadlogboek staat elke beweging met tijd, aantal en notitie. Fout geboekt? Boek de tegenovergestelde beweging, of tel opnieuw. Verwijderen kan niet.",
-      "en": "The stock journal lists every movement with time, quantity and note. Booked something wrong? Book the opposite movement, or count again. Deleting is not possible."
+      "en": "The stock journal lists every movement with time, quantity and note. Booked something wrong? Book the opposite movement, or count again. Deleting is not possible.",
+      "chapter": "Logboek",
+      "chapterNo": 9,
+      "trim": 2.4
     },
     {
       "id": "mistakes",
       "type": "card",
       "nl": "Drie fouten die we vaak zien. Een telling gebruiken om iets erbij te zetten: dat overschrijft het aantal. Een verkoop boeken zonder bedrag: dan mist het rapport omzet. En verplaatsen naar een bak die nog niet geteld is: dan krijg je de melding Tel de bestemming eerst.",
-      "en": "Three mistakes we often see. Using a count to add items: that overwrites the quantity. Booking a sale without an amount: the report misses revenue. And transferring to a bin that was never counted: you get the message Count the destination first."
+      "en": "Three mistakes we often see. Using a count to add items: that overwrites the quantity. Booking a sale without an amount: the report misses revenue. And transferring to a bin that was never counted: you get the message Count the destination first.",
+      "chapter": "Veelgemaakte fouten",
+      "chapterNo": 10
     },
     {
       "id": "outro",
@@ -309,5 +331,11 @@
       "nl": "Samengevat: telling overschrijft, ontvangst en retour tellen op, uitgifte en verkoop tellen af, verplaatsing schuift. Volgende video: etiketten en scannen met je telefoon.",
       "en": "In short: count overwrites, receipt and return add, issue and sale subtract, transfer moves. Next video: labels and scanning with your phone."
     }
-  ]
+  ],
+  "brand": {
+    "name": "KEY24",
+    "accent": "#F26B21",
+    "bg": "#101214",
+    "fg": "#FFFFFF"
+  }
 }
