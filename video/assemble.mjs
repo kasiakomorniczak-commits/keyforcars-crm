@@ -59,7 +59,8 @@ for (const scene of script.scenes) {
       '-filter_complex', `${base}[bg];[1:v]format=rgba,fade=t=in:st=0.4:d=0.4:alpha=1,fade=t=out:st=3.8:d=0.4:alpha=1[tag];[bg][tag]overlay=0:0:eof_action=pass[v];[2:a]apad[a]`,
       '-map', '[v]', '-map', '[a]', '-t', total.toFixed(2), ...norm, seg]);
   }
-  const d = dur(seg); subs.push({ start: clock, end: clock + d, text: text(scene) }); clock += d; parts.push(seg);
+  const d = dur(seg); if (scene.type !== 'card') subs.push({ start: clock, end: clock + d, text: text(scene) }); // a card already shows its text
+  clock += d; parts.push(seg);
 }
 await browser.close();
 

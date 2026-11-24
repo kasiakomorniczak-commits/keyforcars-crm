@@ -13,8 +13,8 @@
     {
       "id": "intro",
       "type": "avatar",
-      "nl": "Welkom bij Key24. In deze video leer je de zes voorraadbewegingen, en wanneer je welke gebruikt.",
-      "en": "Welcome to Key24. In this video you learn the six stock movements, and when to use each one."
+      "nl": "Welkom bij Key24. In deze video leer je de zes voorraadbewegingen.",
+      "en": "Welcome to Key24. In this video you learn the six stock movements."
     },
     {
       "id": "why",
@@ -327,7 +327,7 @@
     },
     {
       "id": "outro",
-      "type": "avatar",
+      "type": "card",
       "nl": "Samengevat: telling overschrijft, ontvangst en retour tellen op, uitgifte en verkoop tellen af, verplaatsing schuift. Volgende video: etiketten en scannen met je telefoon.",
       "en": "In short: count overwrites, receipt and return add, issue and sale subtract, transfer moves. Next video: labels and scanning with your phone."
     }
