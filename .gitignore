@@ -62,3 +62,9 @@ local-data/
 # training video recordings
 /video/out/
 /.hyperframes/
+
+# local voice engine: venv, model caches, Lisa's reference recording, generated audio
+/voice_engine/.venv/
+/voice_engine/voices/*
+!/voice_engine/voices/.gitkeep
+/voice_engine/output/
