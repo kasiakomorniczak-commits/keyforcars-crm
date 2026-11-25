@@ -1,0 +1,173 @@
+{
+ "slug": "s5-bestelvoorstel",
+ "title": {
+  "nl": "Bestelvoorstel: wat bestel ik vandaag?",
+  "en": "Reorder proposal: what do I order today?"
+ },
+ "viewport": {
+  "width": 1920,
+  "height": 1080
+ },
+ "sku": "ALRK03",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "avatar",
+   "nl": "Welkom bij Key24. In deze video leer je het bestelvoorstel lezen.",
+   "en": "Welcome to Key24. In this video you learn to read the reorder proposal."
+  },
+  {
+   "id": "overview",
+   "steps": [
+    {
+     "click": "text=Nu bestellen"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": "text=Binnenkort"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": "text=Geschatte bestelwaarde"
+    },
+    {
+     "wait": 900
+    }
+   ],
+   "nl": "Het bestelvoorstel beantwoordt één vraag: wat moet ik vandaag bestellen? Bovenaan zie je hoeveel artikelen je nu moet bestellen, hoeveel binnenkort, en de geschatte bestelwaarde.",
+   "en": "The reorder proposal answers one question: what should I order today? At the top you see how many items to order now, how many soon, and the estimated order value.",
+   "chapter": "Overzicht",
+   "chapterNo": 1,
+   "url": "/admin/voorraad?view=reorder",
+   "trim": 3.0
+  },
+  {
+   "id": "settings",
+   "steps": [
+    {
+     "fill": [
+      "label:has-text(\"Levertijd leverancier\") input",
+      "10"
+     ]
+    },
+    {
+     "wait": 1200
+    }
+   ],
+   "nl": "Met vier getallen stel je het voorstel af: levertijd van je leverancier, veiligheidsmarge, en voor hoeveel dagen je wilt bestellen. Verander de levertijd naar tien dagen en het voorstel rekent direct opnieuw.",
+   "en": "Four numbers tune the proposal: your supplier lead time, the safety margin, and for how many days you want to order. Change the lead time to ten days and the proposal recalculates at once.",
+   "chapter": "Instellingen",
+   "chapterNo": 2
+  },
+  {
+   "id": "line",
+   "steps": [
+    {
+     "click": "text=Genoeg voor"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": "text=Bestelpunt"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": "text=/^Bestel \\d+ st/"
+    },
+    {
+     "wait": 900
+    }
+   ],
+   "nl": "Elke regel toont de plank, het verwachte aantal, het verbruik per dag, en voor hoeveel dagen het nog genoeg is. Het bestelpunt zegt wanneer je moet bestellen, en rechts staat hoeveel stuks.",
+   "en": "Each line shows the shelf, the expected count, the daily use, and how many days it lasts. The reorder point says when to order, and on the right is how many pieces.",
+   "chapter": "Een regel lezen",
+   "chapterNo": 3
+  },
+  {
+   "id": "drift",
+   "steps": [
+    {
+     "click": "text=waar de plank meer toont"
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "Een geel bericht waarschuwt als de plank meer toont dan er echt ligt. Dat gebeurt bij verkopen zonder locatie. Tel die artikelen opnieuw, dan klopt het voorstel weer.",
+   "en": "A yellow notice warns when the shelf shows more than is really there. That happens with sales without a location. Count those items again and the proposal is right again.",
+   "chapter": "Waarschuwing",
+   "chapterNo": 4
+  },
+  {
+   "id": "copy",
+   "steps": [
+    {
+     "click": "button:has-text(\"Ook artikelen op voorraad tonen\")"
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "click": "button:has-text(\"Kopieer bestellijst\")"
+    },
+    {
+     "wait": 1800
+    }
+   ],
+   "nl": "Wil je alles zien, kies dan Ook artikelen op voorraad tonen. Klaar? Kopieer de bestellijst en stuur die naar je leverancier.",
+   "en": "Want to see everything, choose Also show items in stock. Done? Copy the order list and send it to your supplier.",
+   "chapter": "Bestellijst",
+   "chapterNo": 5
+  },
+  {
+   "id": "mistakes",
+   "type": "card",
+   "nl": "Drie tips. Houd je tellingen actueel, want het voorstel rekent met de laatste telling. Boek elke verkoop met locatie. En kijk elke ochtend naar Nu bestellen.",
+   "en": "Three tips. Keep your counts up to date, because the proposal uses the last count. Book every sale with a location. And check Order now every morning.",
+   "chapter": "Drie tips",
+   "chapterNo": 6,
+   "heading": "Drie tips voor een goed voorstel.",
+   "items": [
+    "Houd je tellingen actueel: het voorstel rekent met de laatste telling.",
+    "Boek elke verkoop met locatie.",
+    "Kijk elke ochtend naar Nu bestellen."
+   ],
+   "headingEn": "Three tips for a good proposal.",
+   "itemsEn": [
+    "Keep your counts up to date: the proposal uses the last count.",
+    "Book every sale with a location.",
+    "Check Order now every morning."
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "avatar",
+   "nl": "Samengevat: stel het voorstel af, lees de regels, houd je tellingen actueel. Volgende video: etiketten en scannen met je telefoon.",
+   "en": "In short: tune the proposal, read the lines, keep your counts up to date. Next video: labels and scanning with your phone."
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "seconds": 3.8,
+   "nl": "Volgende video: etiketten en scannen met je telefoon.",
+   "en": "Next video: labels and scanning with your phone."
+  }
+ ],
+ "brand": {
+  "name": "KEY24",
+  "purple": "#541554",
+  "purpleDark": "#421043",
+  "cream": "#f4ede4",
+  "paper": "#faf7f2",
+  "lilac": "#ead7eb",
+  "ink": "#1d1c1d",
+  "grey": "#615a62"
+ }
+}
