@@ -189,6 +189,13 @@ for (const scene of script.scenes) {
         await glide(x, y);
         await press(scene.id, x, y, false); // a native dropdown would not render in the video: change it directly
         await loc.selectOption(step.select[1]);
+      } else if (step.chooseFile) { // [button selector, file]: the button opens the file picker, answer it with a prepared photo
+        const { loc, x, y } = await target(step.chooseFile[0]);
+        await glide(x, y);
+        await press(scene.id, x, y, false);
+        const [chooser] = await Promise.all([page.waitForEvent('filechooser'), loc.click()]);
+        await chooser.setFiles(step.chooseFile[1]);
+      } else if (step.scrollTop) { await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'smooth' })); await page.waitForTimeout(900);
       } else if (step.wait) await page.waitForTimeout(step.wait);
       if (step.click?.includes('Beweging opslaan')) {
         await page.waitForTimeout(900);

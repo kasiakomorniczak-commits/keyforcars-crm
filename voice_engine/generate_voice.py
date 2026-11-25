@@ -32,7 +32,8 @@ MAX_CHUNK_CHARS = 220          # Chatterbox stops at 1000 speech tokens (~40 s);
 PAUSE_SECONDS = 0.18           # silence between chunks of one scene
 # Spoken form of words the model reads badly. Applied only to what is sent to the model;
 # the exact original text is stored next to the audio (<name>.txt).
-PRONUNCIATION = {"Key24": "Key vierentwintig", "KEY24": "Key vierentwintig", "CRM": "C R M"}
+PRONUNCIATION = {"Key24": "Key vierentwintig", "KEY24": "Key vierentwintig", "CRM": "C R M",
+                 "QR-code": "Q R code", "QR": "Q R", "Bak- en locatie-etiket": "Bak en locatie etiket"}
 
 
 class VoiceError(RuntimeError):

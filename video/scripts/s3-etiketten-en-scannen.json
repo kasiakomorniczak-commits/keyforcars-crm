@@ -1,0 +1,161 @@
+{
+ "slug": "s3-etiketten-en-scannen",
+ "title": {
+  "nl": "Etiketten afdrukken en artikelen scannen",
+  "en": "Printing labels and scanning items"
+ },
+ "viewport": {
+  "width": 1920,
+  "height": 1080
+ },
+ "sku": "ALRK03",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "avatar",
+   "nl": "Welkom bij Key24. In deze video leer je etiketten afdrukken en artikelen scannen.",
+   "en": "Welcome to Key24. In this video you learn to print labels and scan items."
+  },
+  {
+   "id": "preview",
+   "steps": [
+    {
+     "fill": [
+      "#stock-search",
+      "ALRK03"
+     ]
+    },
+    {
+     "click": "text=ALRK03"
+    },
+    {
+     "wait": 800
+    },
+    {
+     "click": "h2:has-text(\"Bak- en locatie-etiket\")"
+    },
+    {
+     "wait": 1200
+    }
+   ],
+   "nl": "Elk artikel en elke bak heeft een etiket. Onder Bak- en locatie-etiket zie je precies wat er wordt geprint: de code, de locatie en een QR-code.",
+   "en": "Every item and every bin has a label. Under Bin and location label you see exactly what will print: the code, the location and a QR code.",
+   "chapter": "Het etiket",
+   "chapterNo": 1,
+   "url": "/admin/voorraad",
+   "trim": 3.0
+  },
+  {
+   "id": "size",
+   "steps": [
+    {
+     "select": [
+      "select[aria-label=\"Etiketformaat\"]",
+      "100x50"
+     ]
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "Kies het formaat dat bij je printer past, bijvoorbeeld honderd bij vijftig millimeter voor een thermische printer. Het voorbeeld past zich direct aan.",
+   "en": "Pick the size that fits your printer, for example one hundred by fifty millimetres for a thermal printer. The preview adjusts at once.",
+   "chapter": "Formaat",
+   "chapterNo": 2
+  },
+  {
+   "id": "bulk",
+   "steps": [
+    {
+     "click": "input[type=checkbox][aria-label^=\"Etiket selecteren voor\"]"
+    },
+    {
+     "wait": 600
+    },
+    {
+     "click": "button:has-text(\"Etiketten (1)\")"
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "Meerdere etiketten tegelijk? Vink de artikelen aan in de lijst en kies Etiketten. Alles gaat in één keer naar de printer.",
+   "en": "Several labels at once? Tick the items in the list and choose Labels. Everything goes to the printer in one go.",
+   "chapter": "Meerdere etiketten",
+   "chapterNo": 3
+  },
+  {
+   "id": "scan",
+   "steps": [
+    {
+     "click": "button:has-text(\"Scan QR / barcode\")"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "chooseFile": [
+      "button:has-text(\"Telefooncamera / foto kiezen\")",
+      "/home/user/keyforcars-crm/video/assets/labels/alrk03.png"
+     ]
+    },
+    {
+     "wait": 1200
+    },
+    {
+     "scrollTop": true
+    },
+    {
+     "wait": 2200
+    }
+   ],
+   "nl": "Scannen gaat zo: kies Scan QR of barcode, maak een foto van het etiket, en het artikel opent vanzelf. Het etiket leest zonder internet, op je eigen toestel.",
+   "en": "Scanning works like this: choose Scan QR or barcode, take a photo of the label, and the item opens by itself. The label is read without internet, on your own device.",
+   "chapter": "Scannen",
+   "chapterNo": 4
+  },
+  {
+   "id": "mistakes",
+   "type": "card",
+   "nl": "Drie tips. Print etiketten op het formaat van je printer. Houd de code in beeld bij het scannen. En leest een etiket nooit, druk dan een nieuw etiket af.",
+   "en": "Three tips. Print labels at your printer size. Keep the code in view when scanning. And if a label never reads, print a new one.",
+   "chapter": "Drie tips",
+   "chapterNo": 5,
+   "heading": "Drie tips voor etiketten.",
+   "items": [
+    "Print op het formaat van je printer.",
+    "Houd de code goed in beeld bij het scannen.",
+    "Leest een etiket nooit? Druk een nieuw etiket af."
+   ],
+   "headingEn": "Three tips for labels.",
+   "itemsEn": [
+    "Print at your printer size.",
+    "Keep the code well in view when scanning.",
+    "Label never reads? Print a new one."
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "avatar",
+   "nl": "Samengevat: kies het formaat, print een of meer etiketten, en scan om te openen. Volgende video: tellen met een foto.",
+   "en": "In short: choose the size, print one or more labels, and scan to open. Next video: counting with a photo."
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "seconds": 3.8,
+   "nl": "Volgende video: tellen met een foto.",
+   "en": "Next video: counting with a photo."
+  }
+ ],
+ "brand": {
+  "name": "KEY24",
+  "purple": "#541554",
+  "purpleDark": "#421043",
+  "cream": "#f4ede4",
+  "paper": "#faf7f2",
+  "lilac": "#ead7eb",
+  "ink": "#1d1c1d",
+  "grey": "#615a62"
+ }
+}
