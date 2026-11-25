@@ -1,0 +1,108 @@
+{
+ "slug": "s1-zoeken-en-vinden",
+ "title": {
+  "nl": "Artikelen zoeken en vinden",
+  "en": "Searching and finding items"
+ },
+ "viewport": {
+  "width": 1920,
+  "height": 1080
+ },
+ "sku": "ALRK03",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "avatar",
+   "nl": "Welkom bij Key24. In deze video leer je artikelen snel vinden in de voorraad.",
+   "en": "Welcome to Key24. In this video you learn to find items quickly in stock."
+  },
+  {
+   "id": "search",
+   "steps": [
+    {
+     "fill": [
+      "#stock-search",
+      "ALRK03"
+     ]
+    },
+    {
+     "wait": 1200
+    },
+    {
+     "click": "text=ALRK03"
+    },
+    {
+     "wait": 900
+    }
+   ],
+   "nl": "Typ een artikelnaam of SKU in het zoekveld. De lijst filtert direct, en met één resultaat open je het artikel meteen.",
+   "en": "Type an item name or SKU in the search field. The list filters at once, and with one result the item opens right away.",
+   "chapter": "Zoeken",
+   "chapterNo": 1,
+   "url": "/admin/voorraad",
+   "trim": 3.0
+  },
+  {
+   "id": "location",
+   "steps": [
+    {
+     "fill": [
+      "#stock-search",
+      "A-03"
+     ]
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "Je kunt ook zoeken op locatie. Typ A-03 en je ziet alles wat op die plank ligt.",
+   "en": "You can also search by location. Type A-03 and you see everything on that shelf.",
+   "chapter": "Zoeken op locatie",
+   "chapterNo": 2
+  },
+  {
+   "id": "detail",
+   "steps": [
+    {
+     "fill": [
+      "#stock-search",
+      "ALRK03"
+     ]
+    },
+    {
+     "click": "text=ALRK03"
+    },
+    {
+     "wait": 2500
+    }
+   ],
+   "nl": "Rechts staat het artikel met het aantal per bak, de locatie en het minimum. Hier boek je ook elke beweging.",
+   "en": "On the right is the item with the quantity per bin, the location and the minimum. This is also where you book every movement.",
+   "chapter": "Artikeldetail",
+   "chapterNo": 3
+  },
+  {
+   "id": "outro",
+   "type": "avatar",
+   "nl": "Samengevat: zoek op naam, SKU of locatie, en open het artikel. Volgende video: de zes voorraadbewegingen.",
+   "en": "In short: search by name, SKU or location, and open the item. Next video: the six stock movements."
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "seconds": 3.8,
+   "nl": "Volgende video: de zes voorraadbewegingen.",
+   "en": "Next video: the six stock movements."
+  }
+ ],
+ "brand": {
+  "name": "KEY24",
+  "purple": "#541554",
+  "purpleDark": "#421043",
+  "cream": "#f4ede4",
+  "paper": "#faf7f2",
+  "lilac": "#ead7eb",
+  "ink": "#1d1c1d",
+  "grey": "#615a62"
+ }
+}
