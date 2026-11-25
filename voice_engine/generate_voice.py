@@ -100,6 +100,15 @@ class Narrator:
         self.model = ChatterboxMultilingualTTS.from_pretrained(device=self.device, t3_model=t3_model)
         self.sample_rate = int(self.model.sr)
 
+    def _trim_tail(self, wav, floor_db: float = -45.0, keep: float = 0.25):
+        """Cut a long silent tail (the model sometimes runs on after the last word). Never touches the speech itself."""
+        level = 10 ** (floor_db / 20)
+        loud = (wav.abs().amax(dim=0) > level).nonzero()
+        if loud.numel() == 0:
+            return wav
+        end = min(wav.shape[-1], int(loud[-1].item()) + int(keep * self.sample_rate))
+        return wav[:, :end]
+
     def synthesize(self, text: str, seed: int | None):
         for written, spoken in PRONUNCIATION.items():
             text = text.replace(written, spoken)
@@ -115,6 +124,7 @@ class Narrator:
             wav = wav.detach().cpu()
             if wav.dim() == 1:
                 wav = wav.unsqueeze(0)
+            wav = self._trim_tail(wav)
             if wav.shape[-1] < int(0.2 * self.sample_rate):
                 raise VoiceError(f"Chunk {i} produced almost no audio: {chunk!r}")
             pieces.append(wav)

@@ -1,0 +1,165 @@
+{
+ "slug": "s6-voorraadrapporten",
+ "title": {
+  "nl": "Voorraadrapporten en logboek",
+  "en": "Stock reports and journal"
+ },
+ "viewport": {
+  "width": 1920,
+  "height": 1080
+ },
+ "sku": "ALRK03",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "avatar",
+   "nl": "Welkom bij Key24. In deze video leer je de voorraadrapporten en het logboek gebruiken.",
+   "en": "Welcome to Key24. In this video you learn to use the stock reports and the journal."
+  },
+  {
+   "id": "overview",
+   "steps": [
+    {
+     "click": "text=Meest verkocht"
+    },
+    {
+     "wait": 1200
+    },
+    {
+     "click": "text=Geboekte verkoopbedragen"
+    },
+    {
+     "wait": 1200
+    }
+   ],
+   "nl": "Onder Voorraadrapporten zie je wat er is verkocht: vandaag en deze week. Je ziet het aantal stuks, de meest verkochte artikelen en de geboekte bedragen.",
+   "en": "Under Stock reports you see what was sold: today and this week. You see the number of pieces, the best sellers and the booked amounts.",
+   "chapter": "Het rapport",
+   "chapterNo": 1,
+   "url": "/admin/voorraad?view=reports",
+   "trim": 3.0
+  },
+  {
+   "id": "views",
+   "steps": [
+    {
+     "click": "button:has-text(\"Staafdiagram\")"
+    },
+    {
+     "wait": 1300
+    },
+    {
+     "click": "button:has-text(\"Ringdiagram\")"
+    },
+    {
+     "wait": 1300
+    },
+    {
+     "click": "button:has-text(\"Lijst\")"
+    },
+    {
+     "wait": 900
+    }
+   ],
+   "nl": "Kies hoe je de cijfers wilt zien: als lijst, als staafdiagram of als ringdiagram.",
+   "en": "Choose how you want to see the figures: as a list, a bar chart or a ring chart.",
+   "chapter": "Weergave",
+   "chapterNo": 2
+  },
+  {
+   "id": "archive",
+   "steps": [
+    {
+     "select": [
+      "label:has-text(\"Kies maand\") select",
+      "oktober 2026"
+     ]
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": "button:has-text(\"Toon rapport\")"
+    },
+    {
+     "wait": 1800
+    }
+   ],
+   "nl": "Een andere periode nodig? Kies in het Rapportarchief een maand, of vul een datum in, en kies Toon rapport.",
+   "en": "Need another period? In the Report archive choose a month, or enter a date, and choose Show report.",
+   "chapter": "Rapportarchief",
+   "chapterNo": 3
+  },
+  {
+   "id": "journal",
+   "steps": [
+    {
+     "fill": [
+      "label:has-text(\"Zoek op SKU\") input",
+      "ALRK03"
+     ]
+    },
+    {
+     "wait": 900
+    },
+    {
+     "select": [
+      "label:has-text(\"Beweging\") select",
+      "Verkoop"
+     ]
+    },
+    {
+     "wait": 1800
+    }
+   ],
+   "nl": "In het Voorraadlogboek staat elke beweging. Zoek op SKU en filter op soort beweging, bijvoorbeeld Verkoop, om een afwijking te vinden.",
+   "en": "The Stock journal lists every movement. Search by SKU and filter by type, for example Sale, to find a discrepancy.",
+   "chapter": "Voorraadlogboek",
+   "chapterNo": 4,
+   "url": "/admin/voorraad?view=journal"
+  },
+  {
+   "id": "mistakes",
+   "type": "card",
+   "nl": "Drie tips. Boek elke verkoop met een bedrag, anders klopt het rapport niet. Klopt een aantal niet, zoek dan eerst in het logboek. En gebruik het archief voor een eigen periode.",
+   "en": "Three tips. Book every sale with an amount, otherwise the report is wrong. If a quantity is off, search the journal first. And use the archive for your own period.",
+   "chapter": "Drie tips",
+   "chapterNo": 5,
+   "heading": "Drie tips voor rapporten.",
+   "items": [
+    "Boek elke verkoop met een bedrag.",
+    "Klopt een aantal niet? Zoek eerst in het logboek.",
+    "Gebruik het archief voor een eigen periode."
+   ],
+   "headingEn": "Three tips for reports.",
+   "itemsEn": [
+    "Book every sale with an amount.",
+    "Quantity off? Search the journal first.",
+    "Use the archive for your own period."
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "avatar",
+   "nl": "Samengevat: bekijk vandaag en deze week, kies een periode in het archief, en zoek een afwijking in het logboek. Tot de volgende video.",
+   "en": "In short: look at today and this week, pick a period in the archive, and find a discrepancy in the journal. See you in the next video."
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "seconds": 3.8,
+   "nl": "Meer video's volgen binnenkort.",
+   "en": "More videos coming soon."
+  }
+ ],
+ "brand": {
+  "name": "KEY24",
+  "purple": "#541554",
+  "purpleDark": "#421043",
+  "cream": "#f4ede4",
+  "paper": "#faf7f2",
+  "lilac": "#ead7eb",
+  "ink": "#1d1c1d",
+  "grey": "#615a62"
+ }
+}
