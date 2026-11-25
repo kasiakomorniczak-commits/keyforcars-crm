@@ -61,3 +61,4 @@ local-data/
 
 # training video recordings
 /video/out/
+/.hyperframes/
