@@ -107,6 +107,16 @@ async function phoneScene(scene, seconds) {
   const heading = (lang === 'en' && scene.headingEn) ? scene.headingEn : (scene.heading ?? '');
   const ui = (lang === 'en' ? scene.uiEn : scene.ui) ?? scene.ui ?? {};
   const label = 'file://' + resolve(`video/assets/labels/${scene.label}`);
+  const bulk = scene.variant === 'bulk';
+  const shelf = bulk ? 'file://' + resolve(`video/assets/labels/${scene.photo}`) : '';
+  const hide = bulk ? 'display:none;' : '';
+  const bulkCam = !bulk ? '' : `<div style="position:absolute;left:0;right:0;top:110px;height:589px;overflow:hidden;animation:inA .5s ease ${at(0.24)}s both">
+      <img src="${shelf}" style="width:100%;height:100%;display:block">
+      ${(scene.boxes ?? []).map((b, k) => `<div style="position:absolute;left:${b.x}%;top:${b.y}%;width:${b.w}%;height:${b.h}%;box-sizing:border-box;border:5px solid ${brand.purple};border-radius:8px;box-shadow:0 0 0 2px #fff inset;animation:lock .3s ease-out ${at(0.40 + 0.07 * k)}s both"><span style="position:absolute;left:-5px;top:-34px;background:${brand.purple};color:#fff;font-size:20px;font-weight:700;padding:3px 12px;border-radius:8px 8px 8px 0">${k + 1}</span></div>`).join('')}
+      <div style="position:absolute;left:0;right:0;height:5px;background:${brand.purple};box-shadow:0 0 28px 8px ${brand.purple};border-radius:3px;animation:scanLine ${(T * 0.24).toFixed(2)}s ease-in-out ${at(0.34)}s both"></div></div>`;
+  const bulkRes = !bulk ? '' : `<div style="margin-top:22px;border:2px solid ${brand.purple};border-radius:16px;background:#fff;padding:20px 22px;animation:cardUp .6s cubic-bezier(.2,.8,.2,1) ${at(0.78)}s both">
+      ${(scene.result ?? []).map((r) => `<div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid #e6e1e7"><div style="font-size:26px;font-weight:700">${r.code}</div><div style="font-size:30px;font-weight:700;color:${brand.purple}">${r.qty}×</div></div>`).join('')}
+      <div style="margin-top:20px;height:58px;border-radius:12px;background:${brand.purple};color:#fff;font-size:21px;font-weight:600;display:grid;place-items:center">${ui.book ?? 'Telling opslaan'}</div></div>`;
   const stepAt = [0.04, 0.26, 0.70];
   const rows = steps.map((s, i) => `<div style="display:grid;grid-template-columns:150px 1fr;align-items:center;min-height:170px;border-top:2px solid ${brand.ink}22;${rise(T * stepAt[i], 0.6)}">
       <div style="position:relative"><div class="wm" style="font-size:130px;letter-spacing:-.06em">${i + 1}</div>
@@ -146,22 +156,23 @@ async function phoneScene(scene, seconds) {
         <!-- 2: camera -->
         <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#3a3238,#121012);animation:cam ${T.toFixed(2)}s linear 0s both">
           ${sb.replace('font-size:17px', 'font-size:17px;color:#fff')}
-          <div style="position:absolute;left:44px;right:44px;top:250px;height:330px">
+          <div style="${hide}position:absolute;left:44px;right:44px;top:250px;height:330px">
             <div style="position:absolute;inset:0;display:grid;place-items:center;animation:slideLabel .8s cubic-bezier(.2,.8,.2,1) ${at(0.26)}s both"><img src="${label}" style="width:330px;border-radius:6px;box-shadow:0 14px 40px rgba(0,0,0,.5)"></div>
             ${['0 0 auto auto', '0 auto auto 0', 'auto 0 0 auto', 'auto auto 0 0'].map((c, k) => { const [t, r, b, l] = c.split(' '); return `<div style="position:absolute;top:${t === 'auto' ? 'auto' : 0};right:${r === 'auto' ? 'auto' : 0};bottom:${b === 'auto' ? 'auto' : 0};left:${l === 'auto' ? 'auto' : 0};width:54px;height:54px;border:6px solid #fff;border-radius:6px;${t !== 'auto' ? 'border-bottom:0;' : 'border-top:0;'}${l !== 'auto' ? 'border-right:0;' : 'border-left:0;'}"></div>`; }).join('')}
             <div style="position:absolute;left:-10px;right:-10px;height:5px;background:${brand.purple};box-shadow:0 0 28px 8px ${brand.purple};border-radius:3px;animation:scanLine ${(T * 0.24).toFixed(2)}s ease-in-out ${at(0.36)}s both"></div></div>
-          <div style="position:absolute;left:50%;top:660px;transform:translateX(-50%);padding:14px 26px;border-radius:30px;background:${brand.purple};color:#fff;font-size:24px;font-weight:600;white-space:nowrap;animation:lock .35s ease-out ${at(0.62)}s both">✓ ${ui.read ?? 'Code gelezen'}</div>
+          ${bulkCam}
+          <div style="position:absolute;left:0;right:0;margin:0 auto;width:max-content;top:${bulk ? 770 : 660}px;padding:14px 26px;border-radius:30px;background:${brand.purple};color:#fff;font-size:24px;font-weight:600;white-space:nowrap;animation:lock .35s ease-out ${at(0.62)}s both">✓ ${ui.read ?? 'Code gelezen'}</div>
           <div style="position:absolute;left:0;right:0;bottom:70px;text-align:center;color:#d9d0d8;font-size:20px">${ui.aim ?? 'Richt de camera op het etiket'}</div></div>
         <!-- 3: result -->
         <div style="position:absolute;inset:0;background:#fafafa;animation:inA .4s ease ${at(0.72)}s both">
           ${sb}${bar}
           <div style="padding:6px 26px">
-            <div style="padding:14px 18px;border-radius:12px;background:${brand.lilac};color:${brand.purpleDark};font-size:22px;font-weight:600;${rise(T * 0.74, 0.5)}">${ui.scanned ?? 'Gescand'}: ALRK03</div>
-            <div style="margin-top:22px;border:2px solid ${brand.purple};border-radius:16px;background:#fff;padding:22px;${`animation:cardUp .6s cubic-bezier(.2,.8,.2,1) ${at(0.78)}s both`}">
+            <div style="padding:14px 18px;border-radius:12px;background:${brand.lilac};color:${brand.purpleDark};font-size:22px;font-weight:600;${rise(T * 0.74, 0.5)}">${ui.scanned ?? 'Gescand'}: ${ui.code ?? 'ALRK03'}</div>
+            <div style="${hide}margin-top:22px;border:2px solid ${brand.purple};border-radius:16px;background:#fff;padding:22px;${`animation:cardUp .6s cubic-bezier(.2,.8,.2,1) ${at(0.78)}s both`}">
               <div style="font-size:34px;font-weight:700;letter-spacing:-.02em">ALRK03</div>
               <div style="margin-top:8px;font-size:21px;line-height:1.3">${ui.item ?? '147 GT 3knops klapsleutel'}</div>
               <div style="margin-top:18px;font-size:19px;color:${brand.grey}">${ui.location ?? 'Locatie'}: A-03-02 / DEMO-2 · 20 st.</div>
-              <div style="margin-top:22px;height:58px;border-radius:12px;background:${brand.purple};color:#fff;font-size:21px;font-weight:600;display:grid;place-items:center">${ui.book ?? 'Beweging boeken'}</div></div></div></div>
+              <div style="margin-top:22px;height:58px;border-radius:12px;background:${brand.purple};color:#fff;font-size:21px;font-weight:600;display:grid;place-items:center">${ui.book ?? 'Beweging boeken'}</div></div>${bulkRes}</div></div>
       </div></div></div>`;
   return frames(`phone-${scene.id}`, html, seconds);
 }

@@ -1,0 +1,209 @@
+{
+ "slug": "s4-bulktelling",
+ "title": {
+  "nl": "Bulktelling: tellen met foto's",
+  "en": "Bulk count: counting with photos"
+ },
+ "viewport": {
+  "width": 1920,
+  "height": 1080
+ },
+ "sku": "ALRK03",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "avatar",
+   "nl": "Welkom bij Key24. In deze video leer je veel artikelen tegelijk tellen met foto's.",
+   "en": "Welcome to Key24. In this video you learn to count many items at once with photos."
+  },
+  {
+   "id": "phone",
+   "type": "phone",
+   "variant": "bulk",
+   "photo": "shelf-a.jpg",
+   "boxes": [
+    {
+     "code": "ALRK03",
+     "x": 11.3,
+     "y": 11.5,
+     "w": 77.3,
+     "h": 19.7
+    },
+    {
+     "code": "ALRK04",
+     "x": 11.3,
+     "y": 41.5,
+     "w": 77.3,
+     "h": 19.7
+    },
+    {
+     "code": "ALRK05",
+     "x": 11.3,
+     "y": 71.5,
+     "w": 77.3,
+     "h": 19.7
+    }
+   ],
+   "result": [
+    {
+     "code": "ALRK03",
+     "qty": 3
+    },
+    {
+     "code": "ALRK04",
+     "qty": 2
+    },
+    {
+     "code": "ALRK05",
+     "qty": 1
+    }
+   ],
+   "heading": "Foto's maken van je schappen.",
+   "headingEn": "Taking photos of your shelves.",
+   "steps": [
+    "Kies Bulktelling",
+    "Maak foto's van schappen en bakken",
+    "Key24 leest elk etiket"
+   ],
+   "stepsEn": [
+    "Choose Bulk count",
+    "Take photos of shelves and bins",
+    "Key24 reads every label"
+   ],
+   "ui": {
+    "title": "Artikelen",
+    "search": "Zoek op artikel, SKU of locatie",
+    "scan": "Bulktelling",
+    "item": "147 GT 3knops klapsleutel",
+    "read": "3 etiketten gelezen",
+    "aim": "Maak een foto van het schap",
+    "scanned": "Bulktelling",
+    "code": "2 foto's · 6 etiketten",
+    "book": "Telling opslaan (3)"
+   },
+   "uiEn": {
+    "title": "Items",
+    "search": "Search by item, SKU or location",
+    "scan": "Bulk count",
+    "item": "147 GT 3-button flip key",
+    "read": "3 labels read",
+    "aim": "Take a photo of the shelf",
+    "scanned": "Bulk count",
+    "code": "2 photos · 6 labels",
+    "book": "Save count (3)"
+   },
+   "nl": "Veel schappen tellen? Kies Bulktelling, maak foto's van schappen en bakken, en Key24 leest elk etiket. Een foto mag meerdere etiketten bevatten.",
+   "en": "Counting many shelves? Choose Bulk count, take photos of shelves and bins, and Key24 reads every label. One photo may hold several labels.",
+   "chapter": "Foto's maken",
+   "chapterNo": 1
+  },
+  {
+   "id": "open",
+   "steps": [
+    {
+     "click": "button:has-text(\"Bulktelling\")"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "chooseFile": [
+      "button:has-text(\"Foto's kiezen\")",
+      [
+       "/home/user/keyforcars-crm/video/assets/labels/shelf-a.jpg",
+       "/home/user/keyforcars-crm/video/assets/labels/shelf-b.jpg"
+      ]
+     ]
+    },
+    {
+     "wait": 3500
+    }
+   ],
+   "nl": "Op de computer kies je Bulktelling en daarna Foto's kiezen. De foto's blijven op je toestel, alleen de getelde aantallen worden opgeslagen.",
+   "en": "On the computer you choose Bulk count and then Choose photos. The photos stay on your device, only the counted quantities are saved.",
+   "chapter": "Foto's kiezen",
+   "chapterNo": 2,
+   "url": "/admin/voorraad",
+   "trim": 3.0
+  },
+  {
+   "id": "review",
+   "steps": [
+    {
+     "click": "th:has-text(\"Verschil\")"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": "input[type=checkbox][aria-label=\"Boeken ALRK05\"]"
+    },
+    {
+     "wait": 1200
+    }
+   ],
+   "nl": "Je ziet per artikel hoeveel etiketten er zijn gezien, het aantal in het systeem en het verschil. Twijfel je over een regel, haal dan het vinkje weg: die boek je niet.",
+   "en": "For every item you see how many labels were seen, the quantity in the system and the difference. Unsure about a line? Untick it and it is not booked.",
+   "chapter": "Controleren",
+   "chapterNo": 3
+  },
+  {
+   "id": "save",
+   "steps": [
+    {
+     "click": "button:has-text(\"Telling opslaan\")"
+    },
+    {
+     "wait": 2500
+    }
+   ],
+   "nl": "Klopt alles? Kies dan Telling opslaan. De aantallen staan direct in je voorraad en in het logboek.",
+   "en": "Looks right? Choose Save count. The quantities are in your stock and in the journal at once.",
+   "chapter": "Opslaan",
+   "chapterNo": 4
+  },
+  {
+   "id": "mistakes",
+   "type": "card",
+   "nl": "Drie tips. Houd het hele etiket in beeld op de foto. Maak geen overlappende foto's van hetzelfde schap. En controleer regels met een groot verschil voordat je boekt.",
+   "en": "Three tips. Keep the whole label in view in the photo. Do not take overlapping photos of the same shelf. And check lines with a big difference before you book.",
+   "chapter": "Drie tips",
+   "chapterNo": 5,
+   "heading": "Drie tips voor bulktelling.",
+   "items": [
+    "Houd het hele etiket in beeld op de foto.",
+    "Maak geen overlappende foto's van hetzelfde schap.",
+    "Controleer regels met een groot verschil voordat je boekt."
+   ],
+   "headingEn": "Three tips for bulk count.",
+   "itemsEn": [
+    "Keep the whole label in view in the photo.",
+    "No overlapping photos of the same shelf.",
+    "Check lines with a big difference before you book."
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "avatar",
+   "nl": "Samengevat: kies Bulktelling, maak je foto's, controleer de regels en sla de telling op. Volgende video: voorraad in je bus.",
+   "en": "In short: choose Bulk count, take photos, check the lines and save the count. Next video: stock in your van."
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "seconds": 3.8,
+   "nl": "Volgende video: voorraad in je bus.",
+   "en": "Next video: stock in your van."
+  }
+ ],
+ "brand": {
+  "name": "KEY24",
+  "purple": "#541554",
+  "purpleDark": "#421043",
+  "cream": "#f4ede4",
+  "paper": "#faf7f2",
+  "lilac": "#ead7eb",
+  "ink": "#1d1c1d",
+  "grey": "#615a62"
+ }
+}
