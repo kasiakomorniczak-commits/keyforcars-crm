@@ -98,6 +98,73 @@ async function endCard(scene, seconds) {
       <div style="font-size:40px;font-weight:500;color:${brand.grey};animation:fade .6s ease-out 1.5s both">${text(scene)}</div></div></div>`;
   return frames(`end-${scene.id}`, html, seconds);
 }
+
+// Phone scene: a phone mockup shows how scanning works (tap Scan, aim at the label, the item opens), beside the numbered steps.
+// Everything is drawn here (no footage), so it needs no camera: the label photo is video/assets/labels/<scene.label>.
+async function phoneScene(scene, seconds) {
+  const T = seconds, at = (f) => (T * f).toFixed(2);
+  const steps = (lang === 'en' && scene.stepsEn) ? scene.stepsEn : scene.steps;
+  const heading = (lang === 'en' && scene.headingEn) ? scene.headingEn : (scene.heading ?? '');
+  const ui = (lang === 'en' ? scene.uiEn : scene.ui) ?? scene.ui ?? {};
+  const label = 'file://' + resolve(`video/assets/labels/${scene.label}`);
+  const stepAt = [0.04, 0.26, 0.70];
+  const rows = steps.map((s, i) => `<div style="display:grid;grid-template-columns:150px 1fr;align-items:center;min-height:170px;border-top:2px solid ${brand.ink}22;${rise(T * stepAt[i], 0.6)}">
+      <div style="position:relative"><div class="wm" style="font-size:130px;letter-spacing:-.06em">${i + 1}</div>
+        <div style="position:absolute;left:0;bottom:4px;width:90px;height:7px;background:${brand.purple};transform-origin:left;animation:sweep .5s ease-out ${(T * stepAt[i] + 0.35).toFixed(2)}s both"></div></div>
+      <div style="font-size:42px;line-height:1.25;font-weight:500">${s}</div></div>`).join('');
+  const sb = `<div style="display:flex;justify-content:space-between;padding:22px 34px 0;font-size:17px;font-weight:600"><span>9:41</span><span>●●● ▮</span></div>`;
+  const bar = `<div style="display:flex;align-items:center;gap:10px;padding:18px 26px 12px"><div class="wm" style="font-size:26px">${brand.name}</div><span style="font-size:14px;color:${brand.grey};letter-spacing:.2em">CRM</span></div>`;
+  const css = `${keyframes}
+    @keyframes phoneIn{from{opacity:0;transform:translateY(60px) scale(.76)}to{opacity:1;transform:scale(.8)}}
+    @keyframes outA{from{opacity:1}to{opacity:0}}
+    @keyframes inA{from{opacity:0}to{opacity:1}}
+    @keyframes tap{0%{transform:scale(.2);opacity:.75}100%{transform:scale(2.4);opacity:0}}
+    @keyframes press{0%,100%{transform:none}50%{transform:scale(.95)}}
+    @keyframes slideLabel{from{opacity:0;transform:translateY(160px) rotate(-9deg) scale(.85)}to{opacity:1;transform:translateY(0) rotate(-3deg) scale(1)}}
+    @keyframes scanLine{from{top:8%}to{top:88%}}
+    @keyframes lock{from{opacity:0;transform:scale(1.25)}to{opacity:1;transform:none}}
+    @keyframes cam{0%,${(22).toFixed(1)}%{opacity:0}${(22 + 400 / (T * 10)).toFixed(2)}%,${(72).toFixed(1)}%{opacity:1}${(72 + 400 / (T * 10)).toFixed(2)}%,100%{opacity:0}}
+    @keyframes cardUp{from{opacity:0;transform:translateY(90px)}to{opacity:1;transform:none}}`;
+  const html = `<style>${css}</style><div style="${paper}position:absolute;inset:0;padding:70px 120px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid ${brand.ink};padding-bottom:22px">
+      <div class="wm" style="font-size:38px">${brand.name}</div>
+      <div style="font-size:17px;letter-spacing:.22em;color:${brand.grey};font-weight:500">${text(script.title).toUpperCase()}</div></div>
+    <div style="position:absolute;left:120px;top:210px;width:900px">
+      <div style="font-size:84px;line-height:1.05;font-weight:700;letter-spacing:-.035em;margin-bottom:34px;${rise(0.1)}">${heading}</div>${rows}</div>
+    <div style="position:absolute;left:1330px;top:175px;width:470px;height:960px;transform:scale(.8);transform-origin:0 0;border-radius:70px;background:${brand.ink};padding:14px;box-sizing:border-box;box-shadow:0 40px 90px rgba(84,21,84,.28),0 0 0 3px #3a393a inset;animation:phoneIn .8s cubic-bezier(.2,.8,.2,1) .15s both">
+      <div style="position:absolute;left:50%;top:26px;width:130px;height:34px;margin-left:-65px;border-radius:20px;background:#000;z-index:9"></div>
+      <div style="position:relative;width:100%;height:100%;border-radius:58px;overflow:hidden;background:#fff">
+        <!-- 1: CRM on the phone -->
+        <div style="position:absolute;inset:0;background:#fafafa;animation:outA .4s ease ${at(0.22)}s both">
+          ${sb}${bar}
+          <div style="padding:6px 26px"><div style="font-size:40px;font-weight:700;letter-spacing:-.03em">${ui.title ?? 'Artikelen'}</div>
+            <div style="margin-top:18px;height:58px;border:2px solid #d9d4da;border-radius:12px;background:#fff;display:flex;align-items:center;padding:0 18px;color:#8a838b;font-size:19px">${ui.search ?? 'Zoek op artikel, SKU of locatie'}</div>
+            <div style="position:relative;margin-top:18px;height:64px;border-radius:12px;background:${brand.purple};color:#fff;font-size:22px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:12px;animation:press .35s ease ${at(0.12)}s both">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M4 12h16"/></svg>${ui.scan ?? 'Scan QR / barcode'}
+              <span style="position:absolute;left:50%;top:50%;width:60px;height:60px;margin:-30px;border-radius:50%;background:${brand.lilac};animation:tap .7s ease-out ${at(0.12)}s both"></span></div>
+            <div style="margin-top:22px;border:2px solid #e6e1e7;border-radius:14px;background:#fff;padding:16px 18px"><div style="font-size:19px;font-weight:600">${ui.item ?? '147 GT 3knops klapsleutel'}</div><div style="margin-top:6px;font-size:16px;color:${brand.grey}">ALRK03</div></div></div></div>
+        <!-- 2: camera -->
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#3a3238,#121012);animation:cam ${T.toFixed(2)}s linear 0s both">
+          ${sb.replace('font-size:17px', 'font-size:17px;color:#fff')}
+          <div style="position:absolute;left:44px;right:44px;top:250px;height:330px">
+            <div style="position:absolute;inset:0;display:grid;place-items:center;animation:slideLabel .8s cubic-bezier(.2,.8,.2,1) ${at(0.26)}s both"><img src="${label}" style="width:330px;border-radius:6px;box-shadow:0 14px 40px rgba(0,0,0,.5)"></div>
+            ${['0 0 auto auto', '0 auto auto 0', 'auto 0 0 auto', 'auto auto 0 0'].map((c, k) => { const [t, r, b, l] = c.split(' '); return `<div style="position:absolute;top:${t === 'auto' ? 'auto' : 0};right:${r === 'auto' ? 'auto' : 0};bottom:${b === 'auto' ? 'auto' : 0};left:${l === 'auto' ? 'auto' : 0};width:54px;height:54px;border:6px solid #fff;border-radius:6px;${t !== 'auto' ? 'border-bottom:0;' : 'border-top:0;'}${l !== 'auto' ? 'border-right:0;' : 'border-left:0;'}"></div>`; }).join('')}
+            <div style="position:absolute;left:-10px;right:-10px;height:5px;background:${brand.purple};box-shadow:0 0 28px 8px ${brand.purple};border-radius:3px;animation:scanLine ${(T * 0.24).toFixed(2)}s ease-in-out ${at(0.36)}s both"></div></div>
+          <div style="position:absolute;left:50%;top:660px;transform:translateX(-50%);padding:14px 26px;border-radius:30px;background:${brand.purple};color:#fff;font-size:24px;font-weight:600;white-space:nowrap;animation:lock .35s ease-out ${at(0.62)}s both">✓ ${ui.read ?? 'Code gelezen'}</div>
+          <div style="position:absolute;left:0;right:0;bottom:70px;text-align:center;color:#d9d0d8;font-size:20px">${ui.aim ?? 'Richt de camera op het etiket'}</div></div>
+        <!-- 3: result -->
+        <div style="position:absolute;inset:0;background:#fafafa;animation:inA .4s ease ${at(0.72)}s both">
+          ${sb}${bar}
+          <div style="padding:6px 26px">
+            <div style="padding:14px 18px;border-radius:12px;background:${brand.lilac};color:${brand.purpleDark};font-size:22px;font-weight:600;${rise(T * 0.74, 0.5)}">${ui.scanned ?? 'Gescand'}: ALRK03</div>
+            <div style="margin-top:22px;border:2px solid ${brand.purple};border-radius:16px;background:#fff;padding:22px;${`animation:cardUp .6s cubic-bezier(.2,.8,.2,1) ${at(0.78)}s both`}">
+              <div style="font-size:34px;font-weight:700;letter-spacing:-.02em">ALRK03</div>
+              <div style="margin-top:8px;font-size:21px;line-height:1.3">${ui.item ?? '147 GT 3knops klapsleutel'}</div>
+              <div style="margin-top:18px;font-size:19px;color:${brand.grey}">${ui.location ?? 'Locatie'}: A-03-02 / DEMO-2 · 20 st.</div>
+              <div style="margin-top:22px;height:58px;border-radius:12px;background:${brand.purple};color:#fff;font-size:21px;font-weight:600;display:grid;place-items:center">${ui.book ?? 'Beweging boeken'}</div></div></div></div>
+      </div></div></div>`;
+  return frames(`phone-${scene.id}`, html, seconds);
+}
 // Intro overlay: the logo pops in beside her, a rule sweeps under it, then the video's title.
 async function introOverlay(seconds) {
   const html = `<style>${keyframes}</style>
@@ -153,6 +220,11 @@ for (const scene of script.scenes) {
     const card = await textCard(scene, voice);
     ff(['-framerate', String(FPS), '-i', card.pattern, '-i', vo,
       '-filter_complex', `[0:v]tpad=stop_mode=clone:stop_duration=${Math.max(0, total - card.animEnd + 0.1).toFixed(2)},scale=${W}:${H},fps=${FPS}[v];[1:a]apad[a]`, '-map', '[v]', '-map', '[a]', '-t', total.toFixed(2), ...norm, seg]);
+  } else if (scene.type === 'phone') {
+    const voice = dur(vo), total = voice + 0.7;
+    const card = await phoneScene(scene, total);
+    ff(['-framerate', String(FPS), '-i', card.pattern, '-i', vo,
+      '-filter_complex', `[0:v]scale=${W}:${H},fps=${FPS}[v];[1:a]apad[a]`, '-map', '[v]', '-map', '[a]', '-t', total.toFixed(2), ...norm, seg]);
   } else if (scene.type === 'endcard') {
     const seconds = scene.seconds ?? 3.6;
     const card = await endCard(scene, seconds);

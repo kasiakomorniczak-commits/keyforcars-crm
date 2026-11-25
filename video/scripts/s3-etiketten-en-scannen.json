@@ -86,6 +86,49 @@
   },
   {
    "id": "scan",
+   "type": "phone",
+   "label": "alrk03.png",
+   "heading": "Scannen met je telefoon.",
+   "headingEn": "Scanning with your phone.",
+   "steps": [
+    "Tik op Scan QR / barcode",
+    "Richt de camera op het etiket",
+    "Het artikel opent vanzelf"
+   ],
+   "stepsEn": [
+    "Tap Scan QR / barcode",
+    "Aim the camera at the label",
+    "The item opens by itself"
+   ],
+   "ui": {
+    "title": "Artikelen",
+    "search": "Zoek op artikel, SKU of locatie",
+    "scan": "Scan QR / barcode",
+    "item": "147 GT 3knops klapsleutel",
+    "read": "Code gelezen",
+    "aim": "Richt de camera op het etiket",
+    "scanned": "Gescand",
+    "location": "Locatie",
+    "book": "Beweging boeken"
+   },
+   "uiEn": {
+    "title": "Items",
+    "search": "Search by item, SKU or location",
+    "scan": "Scan QR / barcode",
+    "item": "147 GT 3-button flip key",
+    "read": "Code read",
+    "aim": "Aim the camera at the label",
+    "scanned": "Scanned",
+    "location": "Location",
+    "book": "Book movement"
+   },
+   "nl": "Scannen gaat zo: tik op Scan QR of barcode, richt de camera op het etiket, en het artikel opent vanzelf.",
+   "en": "Scanning works like this: tap Scan QR or barcode, aim the camera at the label, and the item opens by itself.",
+   "chapter": "Scannen met je telefoon",
+   "chapterNo": 4
+  },
+  {
+   "id": "scan-pc",
    "steps": [
     {
      "click": "button:has-text(\"Scan QR / barcode\")"
@@ -109,10 +152,10 @@
      "wait": 2200
     }
    ],
-   "nl": "Scannen gaat zo: kies Scan QR of barcode, maak een foto van het etiket, en het artikel opent vanzelf. Het etiket leest zonder internet, op je eigen toestel.",
-   "en": "Scanning works like this: choose Scan QR or barcode, take a photo of the label, and the item opens by itself. The label is read without internet, on your own device.",
-   "chapter": "Scannen",
-   "chapterNo": 4
+   "nl": "Zonder camera kies je een foto van het etiket. Je ziet Gescand, en het artikel staat klaar. Het etiket leest zonder internet, op je eigen toestel.",
+   "en": "Without a camera you pick a photo of the label. You see Scanned, and the item is ready. The label is read without internet, on your own device.",
+   "chapter": "Scannen op de computer",
+   "chapterNo": 5
   },
   {
    "id": "mistakes",
@@ -120,7 +163,7 @@
    "nl": "Drie tips. Print etiketten op het formaat van je printer. Houd de code in beeld bij het scannen. En leest een etiket nooit, druk dan een nieuw etiket af.",
    "en": "Three tips. Print labels at your printer size. Keep the code in view when scanning. And if a label never reads, print a new one.",
    "chapter": "Drie tips",
-   "chapterNo": 5,
+   "chapterNo": 6,
    "heading": "Drie tips voor etiketten.",
    "items": [
     "Print op het formaat van je printer.",
