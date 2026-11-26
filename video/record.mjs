@@ -163,7 +163,7 @@ for (const scene of script.scenes) {
   if (scene.url) {
     await page.goto(base + withDemo(scene.url)); await page.waitForLoadState('networkidle'); await page.waitForTimeout(800);
     // Stock page: the form is rebuilt once stock and catalogue have loaded, wiping anything typed before. Wait for the save button to exist AND be enabled.
-    if (scene.url.startsWith('/admin/voorraad') && !scene.url.includes('view=')) {
+    if (scene.url.split('?')[0] === '/admin/voorraad' && !scene.url.includes('view=')) {
       await page.locator('button:has-text("Beweging opslaan")').first().waitFor({ state: 'attached', timeout: 90_000 }).catch(() => {});
       await page.waitForFunction(() => { const b = [...document.querySelectorAll('button')].find((x) => x.textContent.includes('Beweging opslaan')); return !!b && !b.disabled; }, null, { timeout: 90_000 }).catch(() => {});
       await page.waitForTimeout(1500);

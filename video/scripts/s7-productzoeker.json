@@ -1,0 +1,158 @@
+{
+ "slug": "s7-productzoeker",
+ "title": {
+  "nl": "Productzoeker: het juiste product vinden",
+  "en": "Product finder: finding the right product"
+ },
+ "viewport": {
+  "width": 1920,
+  "height": 1080
+ },
+ "sku": "ALRK03",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "avatar",
+   "nl": "Welkom bij Key24. In deze video leer je het juiste product vinden met de Productzoeker.",
+   "en": "Welcome to Key24. In this video you learn to find the right product with the Product finder."
+  },
+  {
+   "id": "vehicle",
+   "steps": [
+    {
+     "fill": [
+      "input[aria-label^=\"Scan of zoek\"]",
+      "alfa romeo 147"
+     ]
+    },
+    {
+     "click": "button:text-is(\"Zoeken\")"
+    },
+    {
+     "wait": 2200
+    }
+   ],
+   "nl": "Je kunt zoeken op productcode, barcode of voertuig. Tik bijvoorbeeld Alfa Romeo in en kies Zoeken. Je ziet alle producten die daarop passen.",
+   "en": "You can search by SKU, EAN or vehicle. For example type Alfa Romeo 147 and choose Search. You see every product that fits.",
+   "chapter": "Zoeken op voertuig",
+   "chapterNo": 1,
+   "url": "/admin/voorraad/p",
+   "trim": 3.0
+  },
+  {
+   "id": "open",
+   "steps": [
+    {
+     "click": "a:has-text(\"ALRK03\")"
+    },
+    {
+     "wait": 2500
+    }
+   ],
+   "nl": "Kies een product uit de lijst om het profiel te openen.",
+   "en": "Choose a product from the list to open its profile.",
+   "chapter": "Profiel openen",
+   "chapterNo": 2
+  },
+  {
+   "id": "profile",
+   "steps": [
+    {
+     "click": "text=Frequentie"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": "text=Past op"
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "In het profiel staan het soort, de chip, de frequentie en het aantal knoppen. Bij Past op zie je voor welke auto's het product geschikt is.",
+   "en": "The profile shows the type, the chip, the frequency and the number of buttons. Under Fits you see which cars the product is suitable for.",
+   "chapter": "Het profiel",
+   "chapterNo": 3
+  },
+  {
+   "id": "stock",
+   "steps": [
+    {
+     "click": "text=Voorraad op locatie"
+    },
+    {
+     "wait": 1800
+    }
+   ],
+   "nl": "Onder Voorraad op locatie zie je waar het product ligt en hoeveel er zijn. Daaronder staan de webshops.",
+   "en": "Under Stock by location you see where the product is and how many there are. Below that are the web shops.",
+   "chapter": "Voorraad en locatie",
+   "chapterNo": 4
+  },
+  {
+   "id": "sku",
+   "steps": [
+    {
+     "fill": [
+      "input[aria-label^=\"Scan of zoek\"]",
+      "ALRK05"
+     ]
+    },
+    {
+     "click": "button:text-is(\"Zoeken\")"
+    },
+    {
+     "wait": 7000
+    }
+   ],
+   "nl": "Weet je de productcode al? Tik die in en je gaat meteen naar het profiel.",
+   "en": "Already know the code? Type the SKU, for example ALRK05, and you go straight to the profile.",
+   "chapter": "Zoeken op code",
+   "chapterNo": 5
+  },
+  {
+   "id": "mistakes",
+   "type": "card",
+   "nl": "Drie tips. Zoek op voertuig als je de code niet kent. Controleer Past op voordat je bestelt. En scan het etiket met je telefoon als je het product in je hand hebt.",
+   "en": "Three tips. Search by vehicle if you do not know the code. Check Fits before you order. And scan the label with your phone when you have the product in your hand.",
+   "chapter": "Drie tips",
+   "chapterNo": 6,
+   "heading": "Drie tips voor de Productzoeker.",
+   "items": [
+    "Ken je de code niet? Zoek op voertuig.",
+    "Controleer Past op voordat je bestelt.",
+    "Product in je hand? Scan het etiket met je telefoon."
+   ],
+   "headingEn": "Three tips for the Product finder.",
+   "itemsEn": [
+    "Do not know the code? Search by vehicle.",
+    "Check Fits before you order.",
+    "Product in your hand? Scan the label with your phone."
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "avatar",
+   "nl": "Samengevat: zoek op productcode, barcode of voertuig, open het profiel en controleer waar het product past en waar het ligt. Tot de volgende video.",
+   "en": "In short: search by SKU, EAN or vehicle, open the profile and check where the product fits and where it is. See you in the next video."
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "seconds": 3.8,
+   "nl": "Meer video's volgen binnenkort.",
+   "en": "More videos coming soon."
+  }
+ ],
+ "brand": {
+  "name": "KEY24",
+  "purple": "#541554",
+  "purpleDark": "#421043",
+  "cream": "#f4ede4",
+  "paper": "#faf7f2",
+  "lilac": "#ead7eb",
+  "ink": "#1d1c1d",
+  "grey": "#615a62"
+ }
+}

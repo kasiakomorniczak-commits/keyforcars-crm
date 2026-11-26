@@ -28,13 +28,14 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 DEFAULT_REFERENCE = HERE / "voices" / "lisa_reference.wav"
 LANGUAGE_ID = "nl"
-MAX_CHUNK_CHARS = 220          # Chatterbox stops at 1000 speech tokens (~40 s); stay far below it
+MAX_CHUNK_CHARS = 100         # short pieces (about one sentence) keep Chatterbox from stopping early; the hard limit is ~40 s of speech
 PAUSE_SECONDS = 0.18           # silence between chunks of one scene
 # Spoken form of words the model reads badly. Applied only to what is sent to the model;
 # the exact original text is stored next to the audio (<name>.txt).
 PRONUNCIATION = {"Key24": "Key vierentwintig", "KEY24": "Key vierentwintig", "CRM": "C R M",
                  "QR-code": "Q R code", "QR": "Q R", "Bak- en locatie-etiket": "Bak en locatie etiket",
-                 "SKU": "S K U", "A-03": "A nul drie"}
+                 "SKU": "S K U", "A-03": "A nul drie",
+                 "EAN": "E A N", "147": "honderdzevenenveertig", "ALRK05": "A L R K nul vijf", "chip": "tsjip"}
 
 
 class VoiceError(RuntimeError):
