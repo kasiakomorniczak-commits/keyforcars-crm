@@ -185,15 +185,15 @@
   {
    "id": "outro",
    "type": "avatar",
-   "nl": "Samengevat: kies Bulktelling, maak je foto's, controleer de regels en sla de telling op. Volgende video: voorraad in je bus.",
-   "en": "In short: choose Bulk count, take photos, check the lines and save the count. Next video: stock in your van."
+   "nl": "Samengevat: kies Bulktelling, maak je foto's, controleer de regels en sla de telling op. Volgende video: het bestelvoorstel.",
+   "en": "In short: choose Bulk count, take your photos, check the lines and save the count. Next video: the reorder proposal."
   },
   {
    "id": "end",
    "type": "endcard",
    "seconds": 3.8,
-   "nl": "Volgende video: voorraad in je bus.",
-   "en": "Next video: stock in your van."
+   "nl": "Volgende video: het bestelvoorstel.",
+   "en": "Next video: the reorder proposal."
   }
  ],
  "brand": {

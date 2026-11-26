@@ -149,15 +149,15 @@
   {
    "id": "outro",
    "type": "avatar",
-   "nl": "Samengevat: stel het voorstel af, lees de regels, houd je tellingen actueel. Volgende video: etiketten en scannen met je telefoon.",
-   "en": "In short: tune the proposal, read the lines, keep your counts up to date. Next video: labels and scanning with your phone."
+   "nl": "Samengevat: stel het voorstel af, lees de regels, houd je tellingen actueel. Volgende video: voorraadrapporten en het logboek.",
+   "en": "In short: tune the proposal, read the lines, keep your counts up to date. Next video: stock reports and the journal."
   },
   {
    "id": "end",
    "type": "endcard",
    "seconds": 3.8,
-   "nl": "Volgende video: etiketten en scannen met je telefoon.",
-   "en": "Next video: labels and scanning with your phone."
+   "nl": "Volgende video: voorraadrapporten en het logboek.",
+   "en": "Next video: stock reports and the journal."
   }
  ],
  "brand": {
