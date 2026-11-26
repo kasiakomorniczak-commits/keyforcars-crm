@@ -33,7 +33,8 @@ PAUSE_SECONDS = 0.18           # silence between chunks of one scene
 # Spoken form of words the model reads badly. Applied only to what is sent to the model;
 # the exact original text is stored next to the audio (<name>.txt).
 PRONUNCIATION = {"Key24": "Key vierentwintig", "KEY24": "Key vierentwintig", "CRM": "C R M",
-                 "QR-code": "Q R code", "QR": "Q R", "Bak- en locatie-etiket": "Bak en locatie etiket"}
+                 "QR-code": "Q R code", "QR": "Q R", "Bak- en locatie-etiket": "Bak en locatie etiket",
+                 "SKU": "S K U", "A-03": "A nul drie"}
 
 
 class VoiceError(RuntimeError):

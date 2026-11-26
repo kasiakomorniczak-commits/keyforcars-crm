@@ -55,7 +55,7 @@
      "wait": 1500
     }
    ],
-   "nl": "Je kunt ook zoeken op locatie. Typ A-03 en je ziet alles wat op die plank ligt.",
+   "nl": "Je kunt ook op locatie zoeken. Tik A-03 in en je ziet alles wat op die plank ligt.",
    "en": "You can also search by location. Type A-03 and you see everything on that shelf.",
    "chapter": "Zoeken op locatie",
    "chapterNo": 2
@@ -76,10 +76,30 @@
      "wait": 2500
     }
    ],
-   "nl": "Rechts staat het artikel met het aantal per bak, de locatie en het minimum. Hier boek je ook elke beweging.",
+   "nl": "Aan de rechterkant staat het artikel, met het aantal per bak, de locatie en het minimum. Hier boek je ook elke beweging.",
    "en": "On the right is the item with the quantity per bin, the location and the minimum. This is also where you book every movement.",
    "chapter": "Artikeldetail",
    "chapterNo": 3
+  },
+  {
+   "id": "mistakes",
+   "type": "card",
+   "nl": "Drie tips. Tik de volledige SKU in, dan krijg je één resultaat. Zoek op plank, bijvoorbeeld A-03, om alles op die plek te zien. En ken je de code niet, scan dan het etiket.",
+   "en": "Three tips. Type the full SKU and you get one result. Search by shelf, for example A-03, to see everything in that place. And if you do not know the code, scan the label.",
+   "chapter": "Drie tips",
+   "chapterNo": 4,
+   "heading": "Drie tips om sneller te vinden.",
+   "items": [
+    "Tik de volledige SKU in voor één resultaat.",
+    "Zoek op plank, bijvoorbeeld A-03.",
+    "Ken je de code niet? Scan het etiket."
+   ],
+   "headingEn": "Three tips to find things faster.",
+   "itemsEn": [
+    "Type the full SKU for one result.",
+    "Search by shelf, for example A-03.",
+    "Do not know the code? Scan the label."
+   ]
   },
   {
    "id": "outro",
