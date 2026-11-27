@@ -24,14 +24,24 @@ const withDemo = (url) => live ? url : url + (url.includes('?') ? '&' : '?') + '
 // channel 'chrome': Playwright's bundled Chromium does not support macOS 12; the installed Google Chrome does.
 const browser = await chromium.launch({ channel: 'chrome' });
 
+let session;
 // Warm-up: the Next.js dev server compiles each route on first visit and then reloads open pages, which wipes a half-filled form mid-take.
 // Visit every page of this video once first (no recording), so nothing compiles while we film.
 {
   const warm = await browser.newContext({ viewport: script.viewport });
   const wp = await warm.newPage();
+  // Sign in here, off camera, and hand the session to the recording context: a login on camera would shift every scene mark.
+  if (process.env.VIDEO_EMAIL) {
+    await wp.goto(`${base}/admin/login`, { timeout: 240_000 }); await wp.waitForLoadState('networkidle', { timeout: 120_000 }).catch(() => {}); await wp.waitForTimeout(3000);
+    await wp.fill('input[name=email]', process.env.VIDEO_EMAIL);
+    await wp.fill('input[name=password]', process.env.VIDEO_PASSWORD ?? '');
+    await wp.click('button[type=submit]');
+    await wp.waitForURL((u) => !u.pathname.endsWith('/login'), { timeout: 120_000 });
+  }
   for (const scene of script.scenes) if (scene.url) {
     await wp.goto(base + withDemo(scene.url), { timeout: 240_000 }); await wp.waitForLoadState('networkidle', { timeout: 120_000 }).catch(() => {}); await wp.waitForTimeout(2500);
   }
+  session = await warm.storageState();
   await warm.close();
 }
 // Local demo stock lives in local-data/keyforcars-stock-demo.json and persists between runs: reset it so every take starts from the same seed.
@@ -42,7 +52,7 @@ if (!live && /127\.0\.0\.1|localhost/.test(base)) {
   await new Promise((resolve) => setTimeout(resolve, 500));
 }
 
-const context = await browser.newContext({ viewport: script.viewport, deviceScaleFactor: 1, recordVideo: { dir: scratch, size: script.viewport }, locale: 'nl-NL', timezoneId: 'Europe/Amsterdam' });
+const context = await browser.newContext({ storageState: session, viewport: script.viewport, deviceScaleFactor: 1, recordVideo: { dir: scratch, size: script.viewport }, locale: 'nl-NL', timezoneId: 'Europe/Amsterdam' });
 const page = await context.newPage();
 
 // Everything we add to the page lives outside React's tree (fixed overlays, a style tag) or edits text nodes only after hydration,
@@ -118,13 +128,6 @@ await context.route((url) => !/^(127\.0\.0\.1|localhost)$/.test(url.hostname), (
   ? route.fulfill({ contentType: 'image/svg+xml', body: '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><rect width="120" height="120" rx="12" fill="#eef1f5"/><rect x="48" y="30" width="24" height="60" rx="8" fill="#c9d1db"/></svg>' })
   : route.continue());
 
-if (process.env.VIDEO_EMAIL) {
-  await page.goto(`${base}/admin/login`);
-  await page.fill('input[name=email]', process.env.VIDEO_EMAIL);
-  await page.fill('input[name=password]', process.env.VIDEO_PASSWORD ?? '');
-  await page.click('button[type=submit]');
-  await page.waitForURL((u) => !u.pathname.endsWith('/login'), { timeout: 20_000 });
-}
 
 const t0 = Date.now();
 const now = () => (Date.now() - t0) / 1000;

@@ -1,0 +1,236 @@
+{
+ "slug": "s8-inkoop",
+ "title": {
+  "nl": "Inkoop: bestellen en ontvangen",
+  "en": "Purchasing: ordering and receiving"
+ },
+ "viewport": {
+  "width": 1920,
+  "height": 1080
+ },
+ "sku": "ALRK03",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "avatar",
+   "nl": "Welkom bij Key24. In deze video leer je inkopen bij je leverancier: bestellen en ontvangen.",
+   "en": "Welcome to Key24. In this video you learn purchasing from your supplier: ordering and receiving."
+  },
+  {
+   "id": "overview",
+   "steps": [
+    {
+     "click": "text=Nieuwe inkooporder"
+    },
+    {
+     "wait": 1200
+    }
+   ],
+   "nl": "Onder Inkoop zie je wat bij de leverancier besteld staat en wat al is ontvangen. Pas bij ontvangst komt de voorraad erbij.",
+   "en": "Under Purchasing you see what is on order with the supplier and what has arrived. Stock is only added when you receive it.",
+   "chapter": "Overzicht",
+   "chapterNo": 1,
+   "url": "/admin/inkoop",
+   "trim": 2.0
+  },
+  {
+   "id": "supplier",
+   "steps": [
+    {
+     "click": "button:text-is(\"Nieuw\")"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "fill": [
+      "[role=dialog] input",
+      "KeyDIY Europe"
+     ]
+    },
+    {
+     "wait": 500
+    },
+    {
+     "click": "button:has-text(\"Leverancier aanmaken\")"
+    },
+    {
+     "wait": 2500
+    }
+   ],
+   "nl": "Nog geen leverancier? Kies Nieuw, vul de naam in en kies Leverancier aanmaken. Alleen de naam is verplicht.",
+   "en": "No supplier yet? Choose New, fill in the name and choose Create supplier. Only the name is required.",
+   "chapter": "Nieuwe leverancier",
+   "chapterNo": 2
+  },
+  {
+   "id": "order",
+   "steps": [
+    {
+     "select": [
+      "#po-supplier",
+      "KeyDIY Europe"
+     ]
+    },
+    {
+     "wait": 600
+    },
+    {
+     "fill": [
+      "#po-note",
+      "Voorraad aanvullen"
+     ]
+    },
+    {
+     "fill": [
+      "#po-search",
+      "ALRK03"
+     ]
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "click": "main button:has-text(\"ALRK03\")"
+    },
+    {
+     "wait": 800
+    },
+    {
+     "fill": [
+      "main form table input[type=number]",
+      "20"
+     ]
+    },
+    {
+     "fill": [
+      "main form table input[inputmode=decimal]",
+      "18,50"
+     ]
+    },
+    {
+     "click": "button:text-is(\"Concept opslaan\")"
+    },
+    {
+     "wait": 2500
+    }
+   ],
+   "nl": "Kies de leverancier, zoek het artikel op productcode en vul het aantal in. Een inkoopprijs is optioneel. Kies dan Concept opslaan.",
+   "en": "Choose the supplier, search the item by product code and enter the quantity. A purchase price is optional. Then choose Save draft.",
+   "chapter": "Inkooporder maken",
+   "chapterNo": 3
+  },
+  {
+   "id": "ordered",
+   "steps": [
+    {
+     "click": "button:text-is(\"Markeer als besteld\")"
+    },
+    {
+     "wait": 2500
+    }
+   ],
+   "nl": "Heb je de order naar de leverancier gestuurd? Kies Markeer als besteld. Nu wacht de order op levering.",
+   "en": "Sent the order to the supplier? Choose Mark as ordered. Now the order waits for delivery.",
+   "chapter": "Besteld",
+   "chapterNo": 4
+  },
+  {
+   "id": "invoice",
+   "steps": [
+    {
+     "fill": [
+      "input[aria-label=\"Factuurnummer leverancier\"]",
+      "KD-2026-1187"
+     ]
+    },
+    {
+     "click": "button:text-is(\"Opslaan\")"
+    },
+    {
+     "wait": 2000
+    }
+   ],
+   "nl": "Komt de factuur van de leverancier, vul dan het factuurnummer in en kies Opslaan. De factuur zet alleen de prijs, niet de voorraad.",
+   "en": "When the supplier invoice arrives, enter the invoice number and choose Save. The invoice only sets the price, not the stock.",
+   "chapter": "Factuur",
+   "chapterNo": 5
+  },
+  {
+   "id": "receive",
+   "steps": [
+    {
+     "fill": [
+      "main input[type=number]",
+      "20"
+     ]
+    },
+    {
+     "fill": [
+      "main input[placeholder=\"Stelling\"]",
+      "A-03-02"
+     ]
+    },
+    {
+     "fill": [
+      "main input[placeholder=\"Bak\"]",
+      "B000145"
+     ]
+    },
+    {
+     "click": "button:text-is(\"Ontvangen\")"
+    },
+    {
+     "wait": 3500
+    }
+   ],
+   "nl": "Komt de levering binnen? Vul het aantal, de stelling en de bak in en kies Ontvangen. De voorraad staat er meteen bij.",
+   "en": "Delivery arrived? Enter the quantity, the shelf and the bin and choose Received. The stock is added at once.",
+   "chapter": "Ontvangst",
+   "chapterNo": 6
+  },
+  {
+   "id": "mistakes",
+   "type": "card",
+   "nl": "Drie tips. Markeer een order pas als besteld als je hem echt hebt verstuurd. Boek de ontvangst op de bak waar het artikel echt ligt. En komt er minder dan besteld, ontvang dan alleen wat er is.",
+   "en": "Three tips. Only mark an order as ordered when you really sent it. Book the receipt on the bin where the item really goes. And if less arrives than ordered, receive only what is there.",
+   "chapter": "Drie tips",
+   "chapterNo": 7,
+   "heading": "Drie tips voor inkoop.",
+   "items": [
+    "Markeer als besteld pas als de order echt verstuurd is.",
+    "Boek de ontvangst op de bak waar het artikel echt ligt.",
+    "Minder geleverd? Ontvang alleen wat er is."
+   ],
+   "headingEn": "Three tips for purchasing.",
+   "itemsEn": [
+    "Mark as ordered only when the order was really sent.",
+    "Book the receipt on the bin where the item really goes.",
+    "Less delivered? Receive only what is there."
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "avatar",
+   "nl": "Samengevat: maak een inkooporder, markeer hem als besteld, vul het factuurnummer in en ontvang de levering. Volgende video: de picklijst.",
+   "en": "In short: create a purchase order, mark it as ordered, fill in the invoice number and receive the delivery. Next video: the pick list."
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "seconds": 3.8,
+   "nl": "Volgende video: de picklijst.",
+   "en": "Next video: the pick list."
+  }
+ ],
+ "brand": {
+  "name": "KEY24",
+  "purple": "#541554",
+  "purpleDark": "#421043",
+  "cream": "#f4ede4",
+  "paper": "#faf7f2",
+  "lilac": "#ead7eb",
+  "ink": "#1d1c1d",
+  "grey": "#615a62"
+ }
+}
