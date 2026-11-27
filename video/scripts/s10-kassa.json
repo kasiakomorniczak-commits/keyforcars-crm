@@ -1,0 +1,215 @@
+{
+ "slug": "s10-kassa",
+ "title": {
+  "nl": "Kassa: verkopen aan de balie",
+  "en": "Till: selling at the counter"
+ },
+ "viewport": {
+  "width": 1920,
+  "height": 1080
+ },
+ "sku": "ALRK03",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "avatar",
+   "nl": "Welkom bij Key24. In deze video leer je verkopen aan de balie met de kassa.",
+   "en": "Welcome to Key24. In this video you learn to sell at the counter with the till."
+  },
+  {
+   "id": "open",
+   "steps": [
+    {
+     "fill": [
+      "main input",
+      "150"
+     ]
+    },
+    {
+     "click": "button:text-is(\"Kassa openen\")"
+    },
+    {
+     "wait": 2500
+    }
+   ],
+   "nl": "Begin de dag met Kassa openen. Tel het wisselgeld in de la en vul het startbedrag in.",
+   "en": "Start the day with Open till. Count the change in the drawer and enter the opening amount.",
+   "chapter": "Kassa openen",
+   "chapterNo": 1,
+   "url": "/admin/kassa",
+   "trim": 2.0
+  },
+  {
+   "id": "scan",
+   "steps": [
+    {
+     "fill": [
+      "input[aria-label=\"Scan barcode of zoek artikel\"]",
+      "TYRK26"
+     ]
+    },
+    {
+     "press": "Enter"
+    },
+    {
+     "wait": 2000
+    }
+   ],
+   "nl": "Scan het artikel of zoek het op. Het komt meteen op de bon, met de prijs en de btw.",
+   "en": "Scan the item or search for it. It goes straight onto the receipt, with the price and VAT.",
+   "chapter": "Artikel scannen",
+   "chapterNo": 2
+  },
+  {
+   "id": "pay",
+   "steps": [
+    {
+     "click": "button:text-is(\"+€ 100,00\")"
+    },
+    {
+     "wait": 500
+    },
+    {
+     "click": "button:text-is(\"+€ 100,00\")"
+    },
+    {
+     "wait": 500
+    },
+    {
+     "click": "button:text-is(\"+€ 50,00\")"
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "Betaalt de klant contant? Tik het bedrag aan met de knoppen en je ziet meteen het wisselgeld. Betaalt de klant met de pin, kies dan PIN.",
+   "en": "Paying cash? Tap the amount with the buttons and you see the change at once. Paying by card? Choose PIN.",
+   "chapter": "Betalen",
+   "chapterNo": 3
+  },
+  {
+   "id": "checkout",
+   "steps": [
+    {
+     "click": "button:has-text(\"Afrekenen\")"
+    },
+    {
+     "wait": 3500
+    },
+    {
+     "click": "button:text-is(\"Volgende klant\")"
+    },
+    {
+     "wait": 2000
+    }
+   ],
+   "nl": "Kies Afrekenen. Je ziet de bon met het wisselgeld: print hem of kies Volgende klant. De verkoop boekt in één keer de factuur, de voorraad en de betaling.",
+   "en": "Choose Check out. You see the receipt with the change: print it or choose Next customer. The sale books the invoice, the stock and the payment in one go.",
+   "chapter": "Afrekenen",
+   "chapterNo": 4
+  },
+  {
+   "id": "cash",
+   "steps": [
+    {
+     "click": "button:text-is(\"Kas in/uit\")"
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "click": "[role=dialog] button:text-is(\"Kas uit\")"
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "press": "Escape"
+    },
+    {
+     "wait": 800
+    }
+   ],
+   "nl": "Haal je geld uit de la of leg je wisselgeld bij? Boek dat met Kas in of Kas uit, dan klopt de kas aan het eind van de dag.",
+   "en": "Taking money out of the drawer or adding change? Book it with Cash in or Cash out, so the till adds up at the end of the day.",
+   "chapter": "Kas in en uit",
+   "chapterNo": 5
+  },
+  {
+   "id": "close",
+   "steps": [
+    {
+     "click": "button:text-is(\"Kassa sluiten (Z)\")"
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "fill": [
+      "[role=dialog] input",
+      "381,25"
+     ]
+    },
+    {
+     "fill": [
+      "[role=dialog] input >> nth=1",
+      "0"
+     ]
+    },
+    {
+     "click": "button:text-is(\"Sluiten en Z-rapport maken\")"
+    },
+    {
+     "wait": 3000
+    }
+   ],
+   "nl": "Aan het eind van de dag kies je Kassa sluiten. Tel het geld in de la, neem het totaal van de pinautomaat over en maak het Z-rapport.",
+   "en": "At the end of the day choose Close till. Count the money in the drawer, copy the card terminal total and create the Z report.",
+   "chapter": "Kassa sluiten",
+   "chapterNo": 6
+  },
+  {
+   "id": "mistakes",
+   "type": "card",
+   "nl": "Drie tips. Open de kassa met het echte bedrag in de la. Boek elke keer dat je geld uit de la haalt. En tel aan het eind van de dag echt, neem niet zomaar het verwachte bedrag over.",
+   "en": "Three tips. Open the till with the real amount in the drawer. Book every time you take money out. And really count at the end of the day, do not just copy the expected amount.",
+   "chapter": "Drie tips",
+   "chapterNo": 7,
+   "heading": "Drie tips voor de kassa.",
+   "items": [
+    "Open de kassa met het echte bedrag in de la.",
+    "Boek elke keer dat je geld uit de la haalt.",
+    "Tel echt bij het sluiten, neem niet zomaar het verwachte bedrag over."
+   ],
+   "headingEn": "Three tips for the till.",
+   "itemsEn": [
+    "Open the till with the real amount in the drawer.",
+    "Book every time you take money out.",
+    "Really count when closing; do not just copy the expected amount."
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "avatar",
+   "nl": "Samengevat: open de kassa, scan, reken af, boek kas in en uit en sluit met een Z-rapport. Volgende video: de Z-rapporten.",
+   "en": "In short: open the till, scan, check out, book cash in and out and close with a Z report. Next video: the Z reports."
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "seconds": 3.8,
+   "nl": "Volgende video: de Z-rapporten.",
+   "en": "Next video: the Z reports."
+  }
+ ],
+ "brand": {
+  "name": "KEY24",
+  "purple": "#541554",
+  "purpleDark": "#421043",
+  "cream": "#f4ede4",
+  "paper": "#faf7f2",
+  "lilac": "#ead7eb",
+  "ink": "#1d1c1d",
+  "grey": "#615a62"
+ }
+}

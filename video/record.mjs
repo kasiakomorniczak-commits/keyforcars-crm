@@ -180,7 +180,10 @@ for (const scene of script.scenes) {
         const { loc, x, y } = await target(step.click);
         await glide(x, y);
         if (step.click.includes('Beweging opslaan')) await page.waitForFunction((el) => !el.disabled, await loc.elementHandle(), { timeout: 20_000 });
-        await press(scene.id, x, y);
+        // Log the click for the zoom, then let Playwright click the element itself: a raw mouse press at a point can land on a
+        // transient invisible layer (the kassa's receipt print) and do nothing.
+        await press(scene.id, x, y, false);
+        await loc.click();
       } else if (step.fill) {
         const { loc, x, y } = await target(step.fill[0]);
         await glide(x, y);

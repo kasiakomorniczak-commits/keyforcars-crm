@@ -35,7 +35,8 @@ PAUSE_SECONDS = 0.18           # silence between chunks of one scene
 PRONUNCIATION = {"Key24": "Key vierentwintig", "KEY24": "Key vierentwintig", "CRM": "C R M",
                  "QR-code": "Q R code", "QR": "Q R", "Bak- en locatie-etiket": "Bak en locatie etiket",
                  "SKU": "S K U", "A-03": "A nul drie",
-                 "EAN": "E A N", "147": "honderdzevenenveertig", "ALRK05": "A L R K nul vijf", "chip": "tsjip"}
+                 "EAN": "E A N", "147": "honderdzevenenveertig", "ALRK05": "A L R K nul vijf", "chip": "tsjip",
+                 "Z-rapporten": "zet rapporten", "Z-rapport": "zet rapport", "btw": "bee tee wee"}
 
 
 class VoiceError(RuntimeError):
