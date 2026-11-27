@@ -1,0 +1,185 @@
+{
+ "slug": "s9-picklijst",
+ "title": {
+  "nl": "Picklijst: bestellingen picken en verzenden",
+  "en": "Pick list: picking and shipping orders"
+ },
+ "viewport": {
+  "width": 1920,
+  "height": 1080
+ },
+ "sku": "ALRK03",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "avatar",
+   "nl": "Welkom bij Key24. In deze video leer je bestellingen picken en verzenden met de picklijst.",
+   "en": "Welcome to Key24. In this video you learn to pick and ship orders with the pick list."
+  },
+  {
+   "id": "overview",
+   "steps": [
+    {
+     "click": "button:has-text(\"keyforcars.nl\")"
+    },
+    {
+     "wait": 1200
+    },
+    {
+     "click": "button:has-text(\"Alle shops\")"
+    },
+    {
+     "wait": 1000
+    }
+   ],
+   "nl": "In de picklijst staan alle betaalde bestellingen die wachten op verzending, per dag en de oudste eerst. Bovenaan filter je op webshop, status en label.",
+   "en": "The pick list shows every paid order waiting to be shipped, by day, oldest first. At the top you filter by web shop, status and label.",
+   "chapter": "Overzicht",
+   "chapterNo": 1,
+   "url": "/admin/bestellingen/picken",
+   "trim": 2.0
+  },
+  {
+   "id": "filter",
+   "steps": [
+    {
+     "click": "button:has-text(\"Te picken\")"
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "Kies het filter Te picken. Dan zie je alleen bestellingen waarvan alles klaarligt. Bij Tekort wacht een regel nog op voorraad.",
+   "en": "Choose To pick. Then you only see orders where everything is ready. Under Shortage a line still waits for stock.",
+   "chapter": "Te picken",
+   "chapterNo": 2
+  },
+  {
+   "id": "scan",
+   "steps": [
+    {
+     "fill": [
+      "input[aria-label=\"Scan artikel\"]",
+      "TYRK26"
+     ]
+    },
+    {
+     "press": "Enter"
+    },
+    {
+     "wait": 1800
+    }
+   ],
+   "nl": "Pak het artikel van de locatie en scan de barcode. De regel staat meteen op Gepickt.",
+   "en": "Take the item from its location and scan the barcode. The line is set to Picked at once.",
+   "chapter": "Scannen",
+   "chapterNo": 3
+  },
+  {
+   "id": "tick",
+   "steps": [
+    {
+     "click": "main input[aria-label=\"Gepickt\"]:not(:checked)"
+    },
+    {
+     "wait": 1800
+    },
+    {
+     "click": "button:has-text(\"Gepickt\")"
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "Geen scanner bij de hand? Vink de regel aan. Zijn alle regels gepickt, dan staat de bestelling onder Gepickt.",
+   "en": "No scanner at hand? Tick the line. When every line is picked, the order moves to Picked.",
+   "chapter": "Aanvinken",
+   "chapterNo": 4
+  },
+  {
+   "id": "label",
+   "steps": [
+    {
+     "followPopup": "button:text-is(\"Verzendlabel\")"
+    },
+    {
+     "wait": 3500
+    },
+    {
+     "back": true
+    },
+    {
+     "wait": 800
+    },
+    {
+     "click": "button:has-text(\"Gepickt\")"
+    },
+    {
+     "wait": 1200
+    }
+   ],
+   "nl": "Maak nu het verzendlabel. Je ziet het adres, de QR-code en de pakbon, klaar om te printen.",
+   "en": "Now create the shipping label. You see the address, the QR code and the packing slip, ready to print.",
+   "chapter": "Verzendlabel",
+   "chapterNo": 5
+  },
+  {
+   "id": "ship",
+   "steps": [
+    {
+     "click": "button:text-is(\"Verzenden\")"
+    },
+    {
+     "wait": 3000
+    }
+   ],
+   "nl": "Ligt het pakket klaar? Kies Verzenden. De voorraad gaat eraf en de bestelling verdwijnt uit de picklijst.",
+   "en": "Parcel ready? Choose Ship. The stock is deducted and the order leaves the pick list.",
+   "chapter": "Verzenden",
+   "chapterNo": 6
+  },
+  {
+   "id": "mistakes",
+   "type": "card",
+   "nl": "Drie tips. Werk van oud naar nieuw, dan wacht niemand te lang. Scan elk artikel, dan pak je nooit het verkeerde. En verzend pas als het label op het pakket zit.",
+   "en": "Three tips. Work from old to new, so nobody waits too long. Scan every item, so you never take the wrong one. And only ship when the label is on the parcel.",
+   "chapter": "Drie tips",
+   "chapterNo": 7,
+   "heading": "Drie tips voor picken.",
+   "items": [
+    "Werk van oud naar nieuw.",
+    "Scan elk artikel, dan pak je nooit het verkeerde.",
+    "Verzend pas als het label op het pakket zit."
+   ],
+   "headingEn": "Three tips for picking.",
+   "itemsEn": [
+    "Work from old to new.",
+    "Scan every item so you never take the wrong one.",
+    "Only ship when the label is on the parcel."
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "avatar",
+   "nl": "Samengevat: kies het filter Te picken, scan of vink de regels af, maak het label en kies Verzenden. Volgende video: de kassa.",
+   "en": "In short: filter on To pick, scan or tick the lines, make the label and ship. Next video: the till."
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "seconds": 3.8,
+   "nl": "Volgende video: de kassa.",
+   "en": "Next video: the till."
+  }
+ ],
+ "brand": {
+  "name": "KEY24",
+  "purple": "#541554",
+  "purpleDark": "#421043",
+  "cream": "#f4ede4",
+  "paper": "#faf7f2",
+  "lilac": "#ead7eb",
+  "ink": "#1d1c1d",
+  "grey": "#615a62"
+ }
+}

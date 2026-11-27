@@ -198,6 +198,18 @@ for (const scene of script.scenes) {
         await press(scene.id, x, y, false);
         const [chooser] = await Promise.all([page.waitForEvent('filechooser'), loc.click()]);
         await chooser.setFiles(step.chooseFile[1]);
+      } else if (step.press) { // a key on the focused field, e.g. Enter after a scan
+        await page.keyboard.press(step.press);
+      } else if (step.followPopup) { // the button opens a new tab (a label, a receipt): show that page in this one, on camera
+        const { loc, x, y } = await target(step.followPopup);
+        await glide(x, y);
+        await press(scene.id, x, y, false);
+        const [popup] = await Promise.all([page.context().waitForEvent('page'), loc.click()]);
+        await popup.waitForLoadState('load').catch(() => {});
+        const url = popup.url(); await popup.close();
+        await page.goto(url); await page.waitForLoadState('networkidle').catch(() => {}); await page.mouse.move(cursor.x, cursor.y);
+      } else if (step.back) {
+        await page.goBack(); await page.waitForLoadState('networkidle').catch(() => {}); await page.mouse.move(cursor.x, cursor.y);
       } else if (step.scrollTop) { await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'smooth' })); await page.waitForTimeout(900);
       } else if (step.wait) await page.waitForTimeout(step.wait);
       if (step.click?.includes('Beweging opslaan')) {
