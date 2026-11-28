@@ -1,0 +1,164 @@
+{
+ "slug": "s11-z-rapporten",
+ "title": {
+  "nl": "Z-rapporten: de kassadag controleren",
+  "en": "Z reports: checking the till day"
+ },
+ "viewport": {
+  "width": 1920,
+  "height": 1080
+ },
+ "sku": "ALRK03",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "avatar",
+   "nl": "Welkom bij Key24. In deze video leer je de Z-rapporten van de kassa lezen.",
+   "en": "Welcome to Key24. In this video you learn to read the till Z reports."
+  },
+  {
+   "id": "list",
+   "steps": [
+    {
+     "click": "th:has-text(\"Netto omzet\")"
+    },
+    {
+     "wait": 1000
+    },
+    {
+     "click": "th:has-text(\"Verschil contant\")"
+    },
+    {
+     "wait": 1200
+    }
+   ],
+   "nl": "Onder Z-rapporten staat elke gesloten kassadag met zijn eigen nummer. Per dag zie je de netto omzet en het verschil in contant en pin.",
+   "en": "Under Z reports you find every closed till day with its own number. For each day you see the net revenue and the cash and card difference.",
+   "chapter": "Overzicht",
+   "chapterNo": 1,
+   "url": "/admin/kassa/sessies",
+   "trim": 2.0
+  },
+  {
+   "id": "open",
+   "steps": [
+    {
+     "click": "tr:has-text(\"25 nov\") a:has-text(\"Bekijken\")"
+    },
+    {
+     "wait": 2500
+    }
+   ],
+   "nl": "Zie je een verschil, zoals hier op vijfentwintig november? Open het rapport met Bekijken.",
+   "en": "See a difference, like here on the twenty fifth of November? Open the report with View.",
+   "chapter": "Rapport openen",
+   "chapterNo": 2
+  },
+  {
+   "id": "detail",
+   "steps": [
+    {
+     "click": "text=Ontvangen per betaalwijze"
+    },
+    {
+     "wait": 1000
+    },
+    {
+     "click": "text=Btw (netto, na retouren)"
+    },
+    {
+     "wait": 1200
+    }
+   ],
+   "nl": "Het rapport toont de verkopen, de retouren, de betaalwijzen, kas in en uit en de btw.",
+   "en": "The report shows the sales, the returns, the payment methods, cash in and out and the VAT.",
+   "chapter": "Het rapport",
+   "chapterNo": 3
+  },
+  {
+   "id": "drawer",
+   "steps": [
+    {
+     "click": "text=Contant in de la"
+    },
+    {
+     "wait": 1000
+    },
+    {
+     "click": "text=Opmerking"
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "Onderaan staat het geld in de la: wat er verwacht werd, wat er geteld is en het verschil. De opmerking legt uit wat er gebeurd is.",
+   "en": "At the bottom is the money in the drawer: what was expected, what was counted and the difference. The note explains what happened.",
+   "chapter": "Geld in de la",
+   "chapterNo": 4
+  },
+  {
+   "id": "print",
+   "steps": [
+    {
+     "click": "button:has-text(\"Z-rapport printen\")"
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "click": "a:has-text(\"Alle Z-rapporten\")"
+    },
+    {
+     "wait": 2000
+    }
+   ],
+   "nl": "Met Z-rapport printen bewaar je het rapport op papier of als pdf voor je boekhouding.",
+   "en": "With Print Z report you keep the report on paper or as a PDF for your bookkeeping.",
+   "chapter": "Printen",
+   "chapterNo": 5
+  },
+  {
+   "id": "mistakes",
+   "type": "card",
+   "nl": "Drie tips. Bekijk elke dag het verschil in contant en pin. Schrijf bij een verschil altijd een opmerking. En bewaar de Z-rapporten voor je boekhouding.",
+   "en": "Three tips. Check the cash and card difference every day. Always add a note when there is a difference. And keep the Z reports for your bookkeeping.",
+   "chapter": "Drie tips",
+   "chapterNo": 6,
+   "heading": "Drie tips voor Z-rapporten.",
+   "items": [
+    "Bekijk elke dag het verschil in contant en pin.",
+    "Schrijf bij een verschil altijd een opmerking.",
+    "Bewaar de Z-rapporten voor je boekhouding."
+   ],
+   "headingEn": "Three tips for Z reports.",
+   "itemsEn": [
+    "Check the cash and card difference every day.",
+    "Always add a note when there is a difference.",
+    "Keep the Z reports for your bookkeeping."
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "avatar",
+   "nl": "Samengevat: controleer elke dag het verschil, open het rapport en print het voor je boekhouding. Volgende video: retouren.",
+   "en": "In short: check the difference every day, open the report and print it for your bookkeeping. Next video: returns."
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "seconds": 3.8,
+   "nl": "Volgende video: retouren.",
+   "en": "Next video: returns."
+  }
+ ],
+ "brand": {
+  "name": "KEY24",
+  "purple": "#541554",
+  "purpleDark": "#421043",
+  "cream": "#f4ede4",
+  "paper": "#faf7f2",
+  "lilac": "#ead7eb",
+  "ink": "#1d1c1d",
+  "grey": "#615a62"
+ }
+}
