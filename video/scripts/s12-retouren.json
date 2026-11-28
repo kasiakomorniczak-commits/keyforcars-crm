@@ -1,0 +1,179 @@
+{
+ "slug": "s12-retouren",
+ "title": {
+  "nl": "Retouren: terug op voorraad",
+  "en": "Returns: back in stock"
+ },
+ "viewport": {
+  "width": 1920,
+  "height": 1080
+ },
+ "sku": "ALRK03",
+ "scenes": [
+  {
+   "id": "intro",
+   "type": "avatar",
+   "nl": "Welkom bij Key24. In deze video leer je een retour terug op voorraad boeken.",
+   "en": "Welcome to Key24. In this video you learn to book a return back into stock."
+  },
+  {
+   "id": "overview",
+   "steps": [
+    {
+     "click": "text=Retour verwacht"
+    },
+    {
+     "wait": 1000
+    },
+    {
+     "click": "text=Alleen bedrag, geen regels"
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "Onder Retouren zie je welke bestellingen in de webshop zijn terugbetaald, maar nog niet terug op voorraad zijn. Soms is alleen een bedrag terugbetaald, zonder artikel.",
+   "en": "Under Returns you see which orders were refunded in the web shop but are not back in stock yet. Sometimes only an amount was refunded, without an item.",
+   "chapter": "Retour verwacht",
+   "chapterNo": 1,
+   "url": "/admin/retouren",
+   "trim": 2.0
+  },
+  {
+   "id": "open",
+   "steps": [
+    {
+     "click": "a:has-text(\"#62823\")"
+    },
+    {
+     "wait": 4500
+    }
+   ],
+   "nl": "Is het pakket binnen? Open de bestelling.",
+   "en": "Has the parcel arrived? Open the order.",
+   "chapter": "Bestelling openen",
+   "chapterNo": 2
+  },
+  {
+   "id": "panel",
+   "steps": [
+    {
+     "click": "text=Terugbetaling en retour"
+    },
+    {
+     "wait": 1200
+    },
+    {
+     "click": "tr:has-text(\"FDRK34\") button:has-text(\"Retour ontvangen\") >> nth=-1"
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "Onder Terugbetaling en retour zie je per artikel wat verzonden, terugbetaald en ontvangen is. Kies Retour ontvangen bij het artikel, of scan het.",
+   "en": "Under Refund and return you see per item what was shipped, refunded and received. Choose Return received at the item, or scan it.",
+   "chapter": "Terugbetaling en retour",
+   "chapterNo": 3
+  },
+  {
+   "id": "book",
+   "steps": [
+    {
+     "click": "input[name=condition][value=opened]"
+    },
+    {
+     "wait": 600
+    },
+    {
+     "select": [
+      "select[name=location]",
+      "A-01 / B1"
+     ]
+    },
+    {
+     "wait": 600
+    },
+    {
+     "fill": [
+      "input[name=note]",
+      "Doos geopend, sleutel onbeschadigd"
+     ]
+    },
+    {
+     "click": "button:has-text(\"Retour boeken\")"
+    },
+    {
+     "wait": 3000
+    }
+   ],
+   "nl": "Kies de staat: nieuw, geopend of defect. Kies de locatie. Twijfel je, kies dan de quarantaine. Koppel de terugbetaling en kies Retour boeken.",
+   "en": "Choose the condition: new, opened or defective. Choose the location, or quarantine when in doubt. Link the refund and choose Book return.",
+   "chapter": "Retour boeken",
+   "chapterNo": 4
+  },
+  {
+   "id": "done",
+   "steps": [
+    {
+     "click": "a[href=\"/admin/retouren\"] >> nth=0"
+    },
+    {
+     "wait": 3500
+    },
+    {
+     "click": "text=Recent ontvangen"
+    },
+    {
+     "wait": 1500
+    }
+   ],
+   "nl": "De voorraad staat er weer bij. Op de pagina Retouren staat de retour nu onder Recent ontvangen.",
+   "en": "The stock is back, and under Returns the return appears under Recently received.",
+   "chapter": "Ontvangen",
+   "chapterNo": 5
+  },
+  {
+   "id": "mistakes",
+   "type": "card",
+   "nl": "Drie tips. Boek een retour pas als het pakket echt binnen is. Twijfel je over de staat, kies dan de quarantaine. En koppel de retour altijd aan de terugbetaling.",
+   "en": "Three tips. Only book a return when the parcel has really arrived. Unsure about the condition? Choose quarantine. And always link the return to the refund.",
+   "chapter": "Drie tips",
+   "chapterNo": 6,
+   "heading": "Drie tips voor retouren.",
+   "items": [
+    "Boek pas als het pakket echt binnen is.",
+    "Twijfel over de staat? Kies de quarantaine.",
+    "Koppel de retour altijd aan de terugbetaling."
+   ],
+   "headingEn": "Three tips for returns.",
+   "itemsEn": [
+    "Only book when the parcel has really arrived.",
+    "Unsure about the condition? Choose quarantine.",
+    "Always link the return to the refund."
+   ]
+  },
+  {
+   "id": "outro",
+   "type": "avatar",
+   "nl": "Samengevat: open de bestelling, kies Retour ontvangen, kies staat en locatie en boek de retour. Volgende video: montage.",
+   "en": "In short: open the order, choose Return received, pick condition and location and book the return. Next video: assembly."
+  },
+  {
+   "id": "end",
+   "type": "endcard",
+   "seconds": 3.8,
+   "nl": "Volgende video: montage.",
+   "en": "Next video: assembly."
+  }
+ ],
+ "brand": {
+  "name": "KEY24",
+  "purple": "#541554",
+  "purpleDark": "#421043",
+  "cream": "#f4ede4",
+  "paper": "#faf7f2",
+  "lilac": "#ead7eb",
+  "ink": "#1d1c1d",
+  "grey": "#615a62"
+ }
+}
